@@ -35,6 +35,87 @@ svg.weather-icon { width: 100%; height: 100%; display: block; }
 .sunset { -webkit-align-items: center; align-items: center; }#sun-icon { width: 33px; height: 33px; display: block; color: #dfb77b; margin-right: 16px; }.sunset .eyebrow { font-size: 9px; display: block; margin-bottom: 5px; }.sun-time { font-size: 21px; font-weight: 300; }.sun-caption { font-size: 12px; font-style: italic; color: #8fa29a; margin-left: 24px; }
 .connection { text-align: right; font-size: 10px; color: #95a69e; }.connection p { margin: 7px 0; }.connection a { color: #8f9f99; text-decoration: none; font-size: 9px; }button { font: inherit; color: #c2cdc5; background: transparent; border: 1px solid #4b5d55; padding: 8px 12px; border-radius: 20px; cursor: pointer; }button span { margin-left: 7px; }button:focus, a:focus { outline: 2px solid #dfb77b; outline-offset: 4px; }button:disabled { opacity: .5; cursor: wait; }
 .landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; opacity: .55; pointer-events: none; }.noscript { padding: 15px; }
+.appearance-controls { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
+.appearance-controls button { min-height: 44px; padding: 9px 13px; font-size: 11px; -webkit-tap-highlight-color: transparent; }
+.appearance-controls button + button { margin-left: 8px; }
+.appearance-controls button span { margin-left: 0; }
+.appearance-controls .theme-swatch { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #dfb77b; margin-right: 8px; }
+.appearance-controls #mode-symbol { display: inline-block; width: 16px; margin-right: 5px; font-size: 15px; vertical-align: -1px; }
+
+/* Explicit palettes keep every theme usable in Safari 10 without CSS variables. */
+html[data-mode="light"], html[data-mode="light"] body { background: #f3efe5; color: #293d37; }
+[data-mode="light"] .dashboard { background: radial-gradient(ellipse at 12% 10%, #e0e8d9 0%, #f0f0e5 40%, #f3efe5 80%); }
+[data-mode="light"] .location, [data-mode="light"] .eyebrow, [data-mode="light"] .section-heading h1,
+[data-mode="light"] .unit, [data-mode="light"] .high-low, [data-mode="light"] .feels-like,
+[data-mode="light"] .section-heading>span, [data-mode="light"] .forecast-time,
+[data-mode="light"] .forecast-rain, [data-mode="light"] .forecast-placeholder,
+[data-mode="light"] .sun-caption, [data-mode="light"] .connection, [data-mode="light"] .connection a { color: #54695e; }
+[data-mode="light"] .date, [data-mode="light"] .meridiem, [data-mode="light"] .high-low span, [data-mode="light"] button { color: #334c40; }
+[data-mode="light"] .brand-mark, [data-mode="light"] .clock-panel .eyebrow,
+[data-mode="light"] .current-icon, [data-mode="light"] .forecast-icon, [data-mode="light"] #sun-icon { color: #906022; }
+[data-mode="light"] .theme-swatch { background: #906022; }
+[data-mode="light"] .location-dot { background: #52775e; }
+[data-mode="light"] .weather-panel, [data-mode="light"] .outlook, [data-mode="light"] .footer, [data-mode="light"] .forecast-hour { border-color: #c6cdbd; }
+[data-mode="light"] button { border-color: #aab8a4; }
+[data-mode="light"] button:focus, [data-mode="light"] a:focus { outline-color: #906022; }
+[data-mode="light"] .landscape { opacity: .14; }
+
+/* Keycap: cool gray surfaces, printed legends, and a single orange accent. */
+html[data-theme="keycap"], [data-theme="keycap"] body { background: #1c1e22; color: #f4f3ef; }
+[data-theme="keycap"] .dashboard { background: linear-gradient(135deg, #34383f 0%, #24272d 45%, #1c1e22 100%); }
+[data-theme="keycap"] .brand, [data-theme="keycap"] .eyebrow, [data-theme="keycap"] .section-heading,
+[data-theme="keycap"] .forecast-time, [data-theme="keycap"] .high-low, [data-theme="keycap"] .appearance-controls { font-family: "Courier New", Courier, monospace; }
+[data-theme="keycap"] .brand { letter-spacing: 2px; }
+[data-theme="keycap"] .brand-mark { display: inline-block; width: 22px; height: 22px; overflow: hidden; font-size: 0; border-radius: 4px; background: #ed7844; vertical-align: -5px; box-shadow: 0 3px 0 #a54226; }
+[data-theme="keycap"] .clock { font-family: "Courier New", Courier, monospace; font-size: 12vw; font-weight: 400; letter-spacing: -7px; }
+[data-theme="keycap"] .meridiem { font-size: 14px; letter-spacing: 0; }
+[data-theme="keycap"] .location, [data-theme="keycap"] .eyebrow, [data-theme="keycap"] .section-heading h1,
+[data-theme="keycap"] .unit, [data-theme="keycap"] .high-low, [data-theme="keycap"] .feels-like,
+[data-theme="keycap"] .section-heading>span, [data-theme="keycap"] .forecast-time,
+[data-theme="keycap"] .forecast-rain, [data-theme="keycap"] .forecast-placeholder,
+[data-theme="keycap"] .sun-caption, [data-theme="keycap"] .connection, [data-theme="keycap"] .connection a { color: #afb7c2; }
+[data-theme="keycap"] .date, [data-theme="keycap"] .meridiem, [data-theme="keycap"] .high-low span, [data-theme="keycap"] button { color: #dce0e5; }
+[data-theme="keycap"] .clock-panel .eyebrow, [data-theme="keycap"] .current-icon,
+[data-theme="keycap"] .forecast-icon, [data-theme="keycap"] #sun-icon { color: #f18b59; }
+[data-theme="keycap"] .theme-swatch, [data-theme="keycap"] .location-dot { background: #f18b59; }
+[data-theme="keycap"] .weather-panel, [data-theme="keycap"] .outlook, [data-theme="keycap"] .footer, [data-theme="keycap"] .forecast-hour { border-color: #4c535d; }
+[data-theme="keycap"] button { border-radius: 5px; background: #363c45; border-color: #57606d; box-shadow: 0 2px 0 #141619; }
+[data-theme="keycap"] button:focus, [data-theme="keycap"] a:focus { outline-color: #f18b59; }
+[data-theme="keycap"] .forecast-hour { background: #343a43; border: 1px solid #515965; border-bottom: 3px solid #171b20; border-radius: 6px; width: 15%; padding: 12px 0; }
+[data-theme="keycap"] .forecast-hour:last-child { border-right: 1px solid #515965; }
+[data-theme="keycap"] .forecast-icon { margin-top: 10px; }
+[data-theme="keycap"] .sun-caption { font-style: normal; }
+[data-theme="keycap"] .landscape { display: none; }
+
+html[data-theme="keycap"][data-mode="light"], [data-theme="keycap"][data-mode="light"] body { background: #eeefed; color: #252a31; }
+[data-theme="keycap"][data-mode="light"] .dashboard { background: linear-gradient(135deg, #fafaf6 0%, #eeefed 55%, #e0e3e5 100%); }
+[data-theme="keycap"][data-mode="light"] .location, [data-theme="keycap"][data-mode="light"] .eyebrow,
+[data-theme="keycap"][data-mode="light"] .section-heading h1, [data-theme="keycap"][data-mode="light"] .unit,
+[data-theme="keycap"][data-mode="light"] .high-low, [data-theme="keycap"][data-mode="light"] .feels-like,
+[data-theme="keycap"][data-mode="light"] .section-heading>span, [data-theme="keycap"][data-mode="light"] .forecast-time,
+[data-theme="keycap"][data-mode="light"] .forecast-rain, [data-theme="keycap"][data-mode="light"] .forecast-placeholder,
+[data-theme="keycap"][data-mode="light"] .sun-caption, [data-theme="keycap"][data-mode="light"] .connection,
+[data-theme="keycap"][data-mode="light"] .connection a { color: #535e6b; }
+[data-theme="keycap"][data-mode="light"] .date, [data-theme="keycap"][data-mode="light"] .meridiem,
+[data-theme="keycap"][data-mode="light"] .high-low span, [data-theme="keycap"][data-mode="light"] button { color: #303942; }
+[data-theme="keycap"][data-mode="light"] .clock-panel .eyebrow, [data-theme="keycap"][data-mode="light"] .current-icon,
+[data-theme="keycap"][data-mode="light"] .forecast-icon, [data-theme="keycap"][data-mode="light"] #sun-icon { color: #a7421d; }
+[data-theme="keycap"][data-mode="light"] .theme-swatch, [data-theme="keycap"][data-mode="light"] .location-dot { background: #bc4f24; }
+[data-theme="keycap"][data-mode="light"] .weather-panel, [data-theme="keycap"][data-mode="light"] .outlook,
+[data-theme="keycap"][data-mode="light"] .footer { border-color: #bac1c7; }
+[data-theme="keycap"][data-mode="light"] .forecast-hour { background: #fafbf9; border-color: #c3c8cb; border-bottom-color: #aab0b6; }
+[data-theme="keycap"][data-mode="light"] button { background: #fafbf9; border-color: #b2bac2; box-shadow: 0 2px 0 #c0c5c9; }
+[data-theme="keycap"][data-mode="light"] button:focus, [data-theme="keycap"][data-mode="light"] a:focus { outline-color: #a7421d; }
+@media (min-width: 1200px) { [data-theme="keycap"] .clock { font-size: 144px; } }
+@media (max-width: 700px) {
+  .masthead { -webkit-flex-wrap: wrap; flex-wrap: wrap; }
+  .appearance-controls { -webkit-order: 3; order: 3; width: 100%; margin-top: 16px; }
+  .appearance-controls button { -webkit-flex: 1; flex: 1; }
+  [data-theme="keycap"] .clock { font-size: 20vw; letter-spacing: -5px; }
+  [data-theme="keycap"] .forecast-hour { width: 15.7%; }
+  [data-theme="keycap"] .forecast-time { font-size: 9px; }
+}
 @media (min-width: 1200px) { .dashboard { padding-left: 8%; padding-right: 8%; }.main-display { min-height: 410px; }.clock { font-size: 174px; } }
+@media (max-height: 850px) and (min-width: 701px) { .dashboard { padding-top: 28px; padding-bottom: 28px; }.main-display { min-height: 320px; padding-top: 24px; padding-bottom: 24px; }.section-heading { margin-top: 20px; margin-bottom: 20px; }.footer { margin-top: 24px; padding-top: 18px; } }
 @media (max-height: 710px) and (min-width: 701px) { .dashboard { padding-top: 23px; padding-bottom: 20px; }.main-display { min-height: 295px; padding-top: 15px; padding-bottom: 20px; }.section-heading { margin-top: 18px; margin-bottom: 16px; }.footer { margin-top: 20px; padding-top: 17px; } }
 @media (max-width: 700px) { .dashboard { padding: 24px 6% 30px; }.location { font-size: 8px; letter-spacing: 1px; }.brand { font-size: 11px; letter-spacing: 3px; }.main-display { display: block; padding: 40px 0 30px; }.clock-panel { width: 100%; }.clock { font-size: 23vw; letter-spacing: -5px; }.date { font-size: 19px; }.weather-panel { width: 100%; border-left: 0; border-top: 1px solid #41504c; padding: 22px 0 0; margin-top: 30px; }.current-icon { top: 23px; right: 5px; }.temperature { margin-top: 0; font-size: 65px; }.condition { margin: 5px 0 13px; }.section-heading>span, .sun-caption { display: none; }.forecast-time { font-size: 9px; letter-spacing: 0; }.forecast-temp { font-size: 20px; }.footer { margin-top: 24px; } }

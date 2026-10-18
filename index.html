@@ -5,17 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Room">
+  <meta name="apple-mobile-web-app-title" content="Ivan's Room">
   <meta name="theme-color" content="#171e23">
   <meta name="description" content="A quiet clock and weather dashboard for Redding, California.">
-  <title>Room · Redding</title>
+  <title>Ivan's Room · Redding</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <script src="appearance.js?v=2"></script>
+  <link rel="stylesheet" href="style.css?v=2">
   <script src="app.js" defer></script>
 </head>
 <body>
   <main class="dashboard">
-    <header class="masthead"><span class="brand"><span class="brand-mark" aria-hidden="true">◒</span> ROOM</span><span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span></header>
+    <header class="masthead">
+      <span class="brand"><span class="brand-mark" aria-hidden="true">◒</span> IVAN'S ROOM</span>
+      <div class="appearance-controls" role="group" aria-label="Dashboard appearance">
+        <button id="theme-toggle" type="button" aria-label="Change theme. Current theme: Calm"><span class="theme-swatch" aria-hidden="true"></span><span id="theme-name">Calm</span></button>
+        <button id="mode-toggle" type="button" aria-label="Switch to light mode"><span id="mode-symbol" aria-hidden="true">☀</span><span id="mode-name">Light</span></button>
+      </div>
+      <span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span>
+    </header>
     <section class="main-display" aria-label="Time and current weather">
       <div class="clock-panel">
         <p class="eyebrow" id="greeting">MAKE YOURSELF AT HOME</p>

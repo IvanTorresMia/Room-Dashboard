@@ -1,6 +1,8 @@
-# Room
+# Ivan's Room
 
 A quiet, landscape clock and weather dashboard for an iPad 4 running iOS 10.3.4. Built with plain HTML, CSS, inline SVG, and ES5 JavaScript. No dependencies, build step, external fonts, or API keys.
+
+The header has two appearance controls: **Calm / Keycap** switches between the original landscape style and a keyboard-inspired gray/orange theme. **Light / Dark** switches brightness independently. Choices are remembered on each device when local storage is available. All four combinations use Safari 10-compatible CSS and JavaScript.
 
 ## Preview
 
