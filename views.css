@@ -28,6 +28,9 @@ html[data-view="glance"] .condition { font-size: 27px; }
 html[data-view="clock"] .landscape, html[data-view="glance"] .landscape { height: 16vh; }
 @media (max-width: 1100px) and (min-width: 701px) { .location { display: none; } }
 @media (max-width: 700px) {
+ .appearance-controls { position: relative; }
+ .appearance-controls .face-control { position: static; }
+ .appearance-controls .face-picker { left: 0; right: auto; width: 100%; max-width: none; top: 54px; }
  .appearance-controls>select { -webkit-flex: 1; flex: 1; max-width: 110px; }
  .appearance-controls .face-control { min-width: 0; }
  .appearance-controls button { padding-left: 8px; padding-right: 8px; }
