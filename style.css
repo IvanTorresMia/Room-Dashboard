@@ -4,39 +4,39 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, 
 .dashboard { position: relative; min-height: 100vh; padding: 35px 5.5% 40px; overflow: hidden; background: radial-gradient(ellipse at 12% 10%, #303d3b 0%, #202b2e 37%, #171e23 75%); }
 .masthead, .main-display, .section-heading, .forecast, .footer, .sunset { display: -webkit-flex; display: flex; }
 .masthead { -webkit-align-items: center; align-items: center; -webkit-justify-content: space-between; justify-content: space-between; position: relative; z-index: 1; }
-.brand { font-size: 13px; font-weight: 600; letter-spacing: 5px; }
+.brand { font-size: 15px; font-weight: 700; letter-spacing: 3px; }
 .brand-mark { color: #dfb77b; font-size: 27px; vertical-align: -3px; margin-right: 9px; }
-.location { font-size: 10px; letter-spacing: 2.4px; color: #adb9b6; }
+.location { font-size: 12px; font-weight: 600; letter-spacing: 1px; color: #adb9b6; }
 .location-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #b6c7ac; margin-left: 10px; }
 .main-display { position: relative; z-index: 1; -webkit-align-items: center; align-items: center; min-height: 350px; padding: 34px 0 32px; }
 .clock-panel { width: 65%; padding-right: 15px; }
-.eyebrow, .section-heading h1 { font-size: 10px; letter-spacing: 2.4px; font-weight: 500; color: #a7b5af; }
-.clock-panel .eyebrow { margin: 0 0 8px 5px; color: #d8b685; }
-.clock { white-space: nowrap; font-size: 142px; font-size: 14.5vw; line-height: 1.12; font-weight: 200; letter-spacing: -8px; font-variant-numeric: tabular-nums; }
-.meridiem { display: inline-block; font-size: 15px; letter-spacing: 1px; margin-left: 12px; color: #d6d7cd; font-weight: 400; }
-.date { font-size: 21px; font-weight: 300; color: #c2cdc5; margin: 10px 0 0 5px; letter-spacing: .3px; }
+.eyebrow, .section-heading h1 { font-size: 14px; letter-spacing: 1.4px; font-weight: 700; color: #a7b5af; }
+.clock-panel .eyebrow { display: none; }
+.clock { white-space: nowrap; font-size: 158px; font-size: 15.5vw; line-height: 1.12; font-weight: 600; letter-spacing: -8px; font-variant-numeric: tabular-nums; }
+.meridiem { display: inline-block; font-size: 22px; letter-spacing: 1px; margin-left: 12px; color: #d6d7cd; font-weight: 600; }
+.date { font-size: 27px; font-weight: 500; color: #c2cdc5; margin: 10px 0 0 5px; letter-spacing: .3px; }
 .weather-panel { position: relative; width: 35%; padding: 10px 0 10px 35px; border-left: 1px solid #41504c; }
 .current-icon { position: absolute; top: 0; right: 0; width: 65px; height: 65px; color: #dfb77b; }
 svg.weather-icon { width: 100%; height: 100%; display: block; }
-.temperature { font-size: 77px; font-weight: 200; line-height: 1.1; letter-spacing: -3px; margin-top: 42px; }
-.degree { font-size: 62px; }.unit { font-size: 15px; color: #aebcb5; letter-spacing: 0; margin-left: 4px; }
-.condition { font-size: 19px; font-weight: 300; margin: 10px 0 17px; }
-.high-low { color: #91a39e; font-size: 9px; letter-spacing: 1px; margin: 0; }
-.high-low span { color: #dfe2d7; font-size: 14px; letter-spacing: 0; padding-left: 5px; }.high-low .divider { padding: 0 12px; color: #687b74; }
-.feels-like { font-size: 12px; color: #91a39e; margin: 12px 0 0; }
+.temperature { font-size: 94px; font-weight: 600; line-height: 1.1; letter-spacing: -3px; margin-top: 52px; }
+.degree { font-size: 66px; }.unit { font-size: 20px; color: #aebcb5; letter-spacing: 0; margin-left: 4px; }
+.condition { font-size: 24px; font-weight: 500; margin: 6px 0 12px; }
+.high-low { color: #91a39e; font-size: 13px; font-weight: 600; letter-spacing: .5px; margin: 0; }
+.high-low span { color: #dfe2d7; font-size: 21px; letter-spacing: 0; padding-left: 5px; }.high-low .divider { padding: 0 8px; color: #687b74; }
+.feels-like { font-size: 16px; font-weight: 500; color: #91a39e; margin: 10px 0 0; }
 .outlook { position: relative; z-index: 1; border-top: 1px solid #3b4947; }
 .section-heading { -webkit-justify-content: space-between; justify-content: space-between; -webkit-align-items: center; align-items: center; margin: 22px 0 23px; }
-.section-heading h1 { margin: 0; }.section-heading>span { font-size: 11px; color: #8c9e99; }
+.section-heading h1 { margin: 0; }.section-heading>span { font-size: 14px; font-weight: 500; color: #8c9e99; }
 .forecast { min-height: 111px; -webkit-justify-content: space-between; justify-content: space-between; }
 .forecast-hour { width: 16.66%; text-align: center; border-right: 1px solid #34433f; }.forecast-hour:last-child { border-right: 0; }
-.forecast-time { font-size: 10px; color: #a9b8af; letter-spacing: 1px; }.forecast-icon { display: block; width: 29px; height: 29px; margin: 13px auto 9px; color: #dfb77b; }.forecast-temp { font-size: 23px; font-weight: 300; }.forecast-rain { font-size: 10px; color: #94acae; margin: 6px 0 0; }
+.forecast-time { font-size: 16px; font-weight: 700; color: #a9b8af; letter-spacing: .5px; }.forecast-icon { display: block; width: 36px; height: 36px; margin: 10px auto 7px; color: #dfb77b; }.forecast-temp { font-size: 34px; font-weight: 600; }.forecast-rain { display: none; }
 .forecast-placeholder { font-size: 14px; color: #91a39e; margin: 24px 0; }
 .footer { position: relative; z-index: 1; margin-top: 30px; padding-top: 22px; border-top: 1px solid #3b4947; -webkit-justify-content: space-between; justify-content: space-between; -webkit-align-items: center; align-items: center; }
-.sunset { -webkit-align-items: center; align-items: center; }#sun-icon { width: 33px; height: 33px; display: block; color: #dfb77b; margin-right: 16px; }.sunset .eyebrow { font-size: 9px; display: block; margin-bottom: 5px; }.sun-time { font-size: 21px; font-weight: 300; }.sun-caption { font-size: 12px; font-style: italic; color: #8fa29a; margin-left: 24px; }
-.connection { text-align: right; font-size: 10px; color: #95a69e; }.connection p { margin: 7px 0; }.connection a { color: #8f9f99; text-decoration: none; font-size: 9px; }button { font: inherit; color: #c2cdc5; background: transparent; border: 1px solid #4b5d55; padding: 8px 12px; border-radius: 20px; cursor: pointer; }button span { margin-left: 7px; }button:focus, a:focus { outline: 2px solid #dfb77b; outline-offset: 4px; }button:disabled { opacity: .5; cursor: wait; }
+.sunset { -webkit-align-items: center; align-items: center; }#sun-icon { width: 38px; height: 38px; display: block; color: #dfb77b; margin-right: 16px; }.sunset .eyebrow { font-size: 13px; display: block; margin-bottom: 5px; }.sun-time { font-size: 28px; font-weight: 600; }.sun-caption { display: none; }
+.connection { text-align: right; font-size: 12px; font-weight: 500; color: #95a69e; }.connection p { margin: 7px 0; }.connection a { color: #8f9f99; text-decoration: none; font-size: 11px; }button { font: inherit; font-weight: 600; color: #c2cdc5; background: transparent; border: 1px solid #4b5d55; padding: 8px 12px; border-radius: 20px; cursor: pointer; }button span { margin-left: 7px; }button:focus, a:focus { outline: 2px solid #dfb77b; outline-offset: 4px; }button:disabled { opacity: .5; cursor: wait; }
 .landscape { position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; opacity: .55; pointer-events: none; }.noscript { padding: 15px; }
 .appearance-controls { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; }
-.appearance-controls button { min-height: 44px; padding: 9px 13px; font-size: 11px; -webkit-tap-highlight-color: transparent; }
+.appearance-controls button { min-height: 44px; padding: 9px 13px; font-size: 14px; -webkit-tap-highlight-color: transparent; }
 .appearance-controls button + button { margin-left: 8px; }
 .appearance-controls button span { margin-left: 0; }
 .appearance-controls .theme-swatch { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #dfb77b; margin-right: 8px; }
@@ -67,8 +67,8 @@ html[data-theme="keycap"], [data-theme="keycap"] body { background: #1c1e22; col
 [data-theme="keycap"] .forecast-time, [data-theme="keycap"] .high-low, [data-theme="keycap"] .appearance-controls { font-family: "Courier New", Courier, monospace; }
 [data-theme="keycap"] .brand { letter-spacing: 2px; }
 [data-theme="keycap"] .brand-mark { display: inline-block; width: 22px; height: 22px; overflow: hidden; font-size: 0; border-radius: 4px; background: #ed7844; vertical-align: -5px; box-shadow: 0 3px 0 #a54226; }
-[data-theme="keycap"] .clock { font-family: "Courier New", Courier, monospace; font-size: 12vw; font-weight: 400; letter-spacing: -7px; }
-[data-theme="keycap"] .meridiem { font-size: 14px; letter-spacing: 0; }
+[data-theme="keycap"] .clock { font-family: "Courier New", Courier, monospace; font-size: 13vw; font-weight: 700; letter-spacing: -7px; }
+[data-theme="keycap"] .meridiem { font-size: 22px; letter-spacing: 0; }
 [data-theme="keycap"] .location, [data-theme="keycap"] .eyebrow, [data-theme="keycap"] .section-heading h1,
 [data-theme="keycap"] .unit, [data-theme="keycap"] .high-low, [data-theme="keycap"] .feels-like,
 [data-theme="keycap"] .section-heading>span, [data-theme="keycap"] .forecast-time,
@@ -106,16 +106,16 @@ html[data-theme="keycap"][data-mode="light"], [data-theme="keycap"][data-mode="l
 [data-theme="keycap"][data-mode="light"] .forecast-hour { background: #fafbf9; border-color: #c3c8cb; border-bottom-color: #aab0b6; }
 [data-theme="keycap"][data-mode="light"] button { background: #fafbf9; border-color: #b2bac2; box-shadow: 0 2px 0 #c0c5c9; }
 [data-theme="keycap"][data-mode="light"] button:focus, [data-theme="keycap"][data-mode="light"] a:focus { outline-color: #a7421d; }
-@media (min-width: 1200px) { [data-theme="keycap"] .clock { font-size: 144px; } }
+@media (min-width: 1200px) { [data-theme="keycap"] .clock { font-size: 156px; } }
 @media (max-width: 700px) {
   .masthead { -webkit-flex-wrap: wrap; flex-wrap: wrap; }
   .appearance-controls { -webkit-order: 3; order: 3; width: 100%; margin-top: 16px; }
   .appearance-controls button { -webkit-flex: 1; flex: 1; }
   [data-theme="keycap"] .clock { font-size: 20vw; letter-spacing: -5px; }
   [data-theme="keycap"] .forecast-hour { width: 15.7%; }
-  [data-theme="keycap"] .forecast-time { font-size: 9px; }
+  [data-theme="keycap"] .forecast-time { font-size: 13px; }
 }
-@media (min-width: 1200px) { .dashboard { padding-left: 8%; padding-right: 8%; }.main-display { min-height: 410px; }.clock { font-size: 174px; } }
+@media (min-width: 1200px) { .dashboard { padding-left: 8%; padding-right: 8%; }.main-display { min-height: 410px; }.clock { font-size: 186px; } }
 @media (max-height: 850px) and (min-width: 701px) { .dashboard { padding-top: 28px; padding-bottom: 28px; }.main-display { min-height: 320px; padding-top: 24px; padding-bottom: 24px; }.section-heading { margin-top: 20px; margin-bottom: 20px; }.footer { margin-top: 24px; padding-top: 18px; } }
-@media (max-height: 710px) and (min-width: 701px) { .dashboard { padding-top: 23px; padding-bottom: 20px; }.main-display { min-height: 295px; padding-top: 15px; padding-bottom: 20px; }.section-heading { margin-top: 18px; margin-bottom: 16px; }.footer { margin-top: 20px; padding-top: 17px; } }
-@media (max-width: 700px) { .dashboard { padding: 24px 6% 30px; }.location { font-size: 8px; letter-spacing: 1px; }.brand { font-size: 11px; letter-spacing: 3px; }.main-display { display: block; padding: 40px 0 30px; }.clock-panel { width: 100%; }.clock { font-size: 23vw; letter-spacing: -5px; }.date { font-size: 19px; }.weather-panel { width: 100%; border-left: 0; border-top: 1px solid #41504c; padding: 22px 0 0; margin-top: 30px; }.current-icon { top: 23px; right: 5px; }.temperature { margin-top: 0; font-size: 65px; }.condition { margin: 5px 0 13px; }.section-heading>span, .sun-caption { display: none; }.forecast-time { font-size: 9px; letter-spacing: 0; }.forecast-temp { font-size: 20px; }.footer { margin-top: 24px; } }
+@media (max-height: 710px) and (min-width: 701px) { .dashboard { padding-top: 23px; padding-bottom: 20px; }.main-display { min-height: 280px; padding-top: 10px; padding-bottom: 10px; }.temperature { margin-top: 42px; }.current-icon { width: 48px; height: 48px; }.section-heading { margin-top: 18px; margin-bottom: 16px; }.footer { margin-top: 16px; padding-top: 15px; }[data-theme="keycap"] .forecast-hour { padding-top: 8px; padding-bottom: 8px; } }
+@media (max-width: 700px) { .dashboard { padding: 24px 6% 30px; }.location { font-size: 10px; letter-spacing: 0; }.brand { font-size: 13px; letter-spacing: 1px; }.main-display { display: block; padding: 32px 0 26px; }.clock-panel { width: 100%; }.clock { font-size: 23vw; letter-spacing: -5px; }.date { font-size: 24px; }.weather-panel { width: 100%; border-left: 0; border-top: 1px solid #41504c; padding: 22px 0 0; margin-top: 30px; }.current-icon { top: 23px; right: 5px; }.temperature { margin-top: 0; font-size: 80px; }.condition { margin: 5px 0 13px; }.section-heading>span, .sun-caption { display: none; }.forecast-time { font-size: 13px; letter-spacing: 0; }.forecast-temp { font-size: 28px; }.footer { margin-top: 24px; } }
