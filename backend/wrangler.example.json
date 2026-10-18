@@ -1,0 +1,8 @@
+{
+  "name": "ivans-room-remote",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-18",
+  "workers_dev": true,
+  "vars": { "ALLOWED_ORIGIN": "https://ivantorresmia.github.io" },
+  "d1_databases": [{ "binding": "DB", "database_name": "ivans-room-remote", "database_id": "REPLACE_WITH_CREATED_DATABASE_ID" }]
+}

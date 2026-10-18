@@ -1,9 +1,9 @@
 // Kept separate and loaded before CSS to restore a saved appearance without flashing.
 (function () {
   'use strict';
-  var key = 'room-appearance-v1';
-  var theme = 'calm';
-  var mode = 'dark';
+  var state = window.RoomState.get();
+  var theme = state.theme;
+  var mode = state.mode;
   var root = document.documentElement;
   var faces = {
     calm: { name: 'Calm', light: '#f3efe5', dark: '#171e23' },
@@ -12,16 +12,10 @@
     terminal: { name: 'Terminal', light: '#edf3e7', dark: '#101c16' },
     tide: { name: 'Tide', light: '#edf5fa', dark: '#122535' }
   };
-  try {
-    var saved = JSON.parse(localStorage.getItem(key));
-    if (saved) {
-      if (typeof saved.theme === 'string' && faces.hasOwnProperty(saved.theme)) { theme = saved.theme; }
-      if (saved.mode === 'light' || saved.mode === 'dark') { mode = saved.mode; }
-    }
-  } catch (ignored) { /* Appearance still works when storage is unavailable. */ }
   function apply() {
     root.setAttribute('data-theme', theme);
     root.setAttribute('data-mode', mode);
+    root.setAttribute('data-view', state.view);
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) { meta.setAttribute('content', faces[theme][mode]); }
   }
@@ -29,6 +23,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var themeButton = document.getElementById('theme-toggle');
     var modeButton = document.getElementById('mode-toggle');
+    var viewSelect = document.getElementById('view-select');
     var picker = document.getElementById('face-picker');
     var choices = picker.querySelectorAll('[data-face]');
     function closePicker(restoreFocus) {
@@ -37,6 +32,8 @@
       if (restoreFocus) { themeButton.focus(); }
     }
     function update() {
+      state = window.RoomState.get(); theme = state.theme; mode = state.mode;
+      viewSelect.value = state.view;
       apply();
       var name = faces[theme].name;
       document.getElementById('theme-name').textContent = name;
@@ -49,8 +46,8 @@
       modeButton.setAttribute('aria-label', 'Switch to ' + (mode === 'dark' ? 'light' : 'dark') + ' mode');
     }
     function save() {
+      window.RoomState.set({ theme: theme, mode: mode, view: viewSelect.value });
       update();
-      try { localStorage.setItem(key, JSON.stringify({ theme: theme, mode: mode })); } catch (ignored) { /* Private browsing may block storage. */ }
     }
     themeButton.addEventListener('click', function () {
       picker.hidden = !picker.hidden;
@@ -71,6 +68,8 @@
       if (!picker.hidden && !picker.contains(event.target) && !themeButton.contains(event.target)) { closePicker(false); }
     });
     modeButton.addEventListener('click', function () { mode = mode === 'dark' ? 'light' : 'dark'; save(); });
+    viewSelect.addEventListener('change', save);
+    window.RoomState.subscribe(update);
     update();
   });
 }());

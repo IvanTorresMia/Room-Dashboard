@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer"><title>Control · Ivan's Room</title>
+<link rel="stylesheet" href="control.css?v=5">
+<script src="../state.js?v=5"></script><script src="../remote-config.js?v=5"></script><script src="../remote.js?v=5" defer></script><script src="control.js?v=5" defer></script>
+</head>
+<body><main class="controller">
+<header><a class="home-link" href="../">IVAN'S ROOM ↗</a><span class="tag">REMOTE CONTROL</span></header>
+<h1>Set the mood.</h1><p class="intro">A different view. A different feeling. The same room.</p>
+<div class="connection-banner"><span class="status-dot" id="status-dot"></span><p id="remote-status" role="status">Not paired · changes stay on this device</p><button type="button" id="connection-toggle">Connect</button></div>
+<section id="connection-panel" class="panel" aria-label="Device connection">
+<h2>Connect your display</h2><p>Enter a pairing code from a connected device, or paste its private pairing link.</p>
+<form id="pair-form"><label for="pair-code">Pairing code or link</label><input id="pair-code" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="XXXX-XXXX-XXXX or pairing link" required><button class="primary" type="submit">Connect this device</button></form>
+<p id="pair-error" class="error" role="status"></p>
+<details id="advanced"><summary>First-time setup / advanced connection</summary><p>After deploying the Cloudflare Worker, enter its address and room key. These stay on this device.</p><form id="setup-form"><label for="endpoint">Worker address</label><input type="url" id="endpoint" placeholder="https://ivans-room-remote.your-account.workers.dev" required><label for="room-key">Room key</label><input id="room-key" type="password" autocomplete="off" required><button type="submit">Connect to Worker</button></form><a href="../backend/SETUP.md">Cloudflare setup instructions</a></details>
+<div id="sharing" hidden><h3>Pair another device</h3><p>Generate a one-use code, then enter it on the other device’s control page. Codes expire after 10 minutes.</p><button id="create-code" type="button">Generate pairing code</button><output id="generated-code"></output><p>Or copy the private display link and open it on the iPad.</p><input id="display-link" readonly aria-label="Private display pairing link"><button id="copy-link" type="button">Copy display link</button><p class="small">Anyone with this code or link can control the display. Keep it private.</p><button id="disconnect" type="button">Disconnect this device</button></div>
+</section>
+<div class="control-grid"><section class="panel settings"><h2>What’s on display?</h2><div class="view-options" role="group" aria-label="Content view"><button type="button" data-view="clock"><strong>Clock</strong><span>Just the time &amp; date</span></button><button type="button" data-view="glance"><strong>Glance</strong><span>Time &amp; current weather</span></button><button type="button" data-view="weather"><strong>Weather</strong><span>Forecast &amp; sunset too</span></button></div>
+<h2>Choose a style</h2><div class="theme-options" role="group" aria-label="Style"><button type="button" data-theme="calm"><i class="calm"></i>Calm</button><button type="button" data-theme="keycap"><i class="keycap"></i>Keycap</button><button type="button" data-theme="edition"><i class="edition"></i>Edition</button><button type="button" data-theme="terminal"><i class="terminal"></i>Terminal</button><button type="button" data-theme="tide"><i class="tide"></i>Tide</button></div>
+<h2>Light or dark?</h2><div class="mode-options" role="group" aria-label="Brightness"><button type="button" data-mode="light">☀ Light</button><button type="button" data-mode="dark">☾ Dark</button></div><p class="small" id="selection-summary"></p></section>
+<section class="panel preview-panel"><h2>Your selection</h2><p class="small">Preview of your chosen settings. The status above tells you when the wall display confirms them.</p><div id="preview-wrap"><iframe id="preview" src="../?preview=1" title="Dashboard preview" tabindex="-1" aria-hidden="true"></iframe></div><p class="small">The iPad keeps its own controls, too.</p></section></div>
+<footer>Made for a quiet corner of Redding.</footer>
+</main></body></html>

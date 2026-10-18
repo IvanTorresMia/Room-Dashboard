@@ -1,0 +1,43 @@
+[hidden] { display: none !important; }
+select { font: inherit; font-weight: 600; border: 1px solid #74817a; border-radius: 7px; background: #25332f; color: #edf3ec; padding: 9px 8px; min-height: 44px; }
+select:focus { outline: 2px solid #dcaf72; outline-offset: 3px; }
+.appearance-controls>select { font-size: 14px; margin-right: 8px; max-width: 125px; }
+html[data-mode="light"] select { background: #f9faf6; color: #263e35; border-color: #83978a; }
+html[data-theme="keycap"] select { border-radius: 4px; }
+html[data-theme="terminal"] select { border-radius: 0; font-family: "Courier New", monospace; }
+html[data-theme="keycap"][data-mode="dark"] select { background: #363c45; color: #dce0e5; border-color: #57606d; }
+html[data-theme="edition"][data-mode="dark"] select { background: #312a26; color: #f6edde; border-color: #6e5c51; }
+html[data-theme="terminal"][data-mode="dark"] select { background: #182c20; color: #d6f6d4; border-color: #48694f; }
+html[data-theme="tide"][data-mode="dark"] select { background: #203b50; color: #e1f4ff; border-color: #42657d; }
+.connection .remote-link { display: inline-block; padding: 5px 0; }
+.sync-indicator { position: fixed; bottom: 4px; left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); font-size: 11px; padding: 5px 10px; border-radius: 5px; background: #293c34; color: #fff; z-index: 10; margin: 0; }
+html[data-view="clock"] .weather-panel, html[data-view="clock"] .outlook,
+html[data-view="clock"] .footer, html[data-view="glance"] .outlook,
+html[data-view="glance"] .footer, html[data-view="glance"] .high-low,
+html[data-view="glance"] .feels-like { display: none; }
+html[data-view="clock"] .clock-panel { width: 100%; text-align: center; padding: 0; }
+html[data-view="clock"] .main-display { min-height: 70vh; }
+html[data-view="clock"] .clock { font-size: 24vw; letter-spacing: -10px; }
+html[data-view="clock"] .date { font-size: 32px; }
+html[data-view="clock"] .meridiem { font-size: 27px; }
+html[data-view="clock"][data-theme="keycap"] .clock,
+html[data-view="clock"][data-theme="terminal"] .clock { font-size: 23vw; }
+html[data-view="glance"] .main-display { min-height: 70vh; }
+html[data-view="glance"] .temperature { font-size: 110px; }
+html[data-view="glance"] .condition { font-size: 27px; }
+html[data-view="clock"] .landscape, html[data-view="glance"] .landscape { height: 16vh; }
+@media (max-width: 1100px) and (min-width: 701px) { .location { display: none; } }
+@media (max-width: 700px) {
+ .appearance-controls>select { -webkit-flex: 1; flex: 1; max-width: 110px; }
+ .appearance-controls .face-control { min-width: 0; }
+ .appearance-controls button { padding-left: 8px; padding-right: 8px; }
+ html[data-view="clock"] .clock { font-size: 25vw; letter-spacing: -5px; }
+ html[data-view="clock"][data-theme="keycap"] .clock, html[data-view="clock"][data-theme="terminal"] .clock { font-size: 23vw; }
+ html[data-view="clock"] .date { font-size: 24px; }
+ html[data-view="clock"] .meridiem { font-size: 19px; margin-left: 5px; }
+ html[data-view="glance"] .main-display { min-height: 0; }
+ html[data-view="glance"] .temperature { font-size: 90px; }
+}
+
+.controller-link { color: inherit; font-size: 12px; font-weight: 600; text-decoration: none; padding: 12px 5px; }
+@media (max-width: 700px) { .controller-link { font-size: 12px; }.location { display: none; } }

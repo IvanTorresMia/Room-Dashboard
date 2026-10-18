@@ -7,19 +7,25 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ivan's Room">
   <meta name="theme-color" content="#171e23">
+  <meta name="referrer" content="no-referrer">
   <meta name="description" content="A quiet clock and weather dashboard for Redding, California.">
   <title>Ivan's Room · Redding</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <script src="appearance.js?v=4"></script>
-  <link rel="stylesheet" href="style.css?v=4">
-  <link rel="stylesheet" href="faces.css?v=4">
-  <script src="app.js" defer></script>
+  <script src="state.js?v=5"></script>
+  <script src="appearance.js?v=5"></script>
+  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="faces.css?v=5">
+  <link rel="stylesheet" href="views.css?v=5">
+  <script src="remote-config.js?v=5"></script>
+  <script src="remote.js?v=5" defer></script>
+  <script src="app.js?v=5" defer></script>
 </head>
 <body>
   <main class="dashboard">
     <header class="masthead">
       <span class="brand"><span class="brand-mark" aria-hidden="true">◒</span> IVAN'S ROOM</span>
       <div class="appearance-controls" role="group" aria-label="Dashboard appearance">
+        <select id="view-select" aria-label="Content view"><option value="clock">Clock</option><option value="glance">Glance</option><option value="weather">Weather</option></select>
         <div class="face-control">
           <button id="theme-toggle" type="button" aria-label="Choose face. Current face: Calm" aria-expanded="false" aria-controls="face-picker"><span class="theme-swatch" aria-hidden="true"></span><span id="theme-name">Calm</span><span class="picker-arrow" aria-hidden="true">▾</span></button>
           <nav id="face-picker" class="face-picker" aria-label="Choose a dashboard face" hidden>
@@ -34,6 +40,7 @@
         </div>
         <button id="mode-toggle" type="button" aria-label="Switch to light mode"><span id="mode-symbol" aria-hidden="true">☀</span><span id="mode-name">Light</span></button>
       </div>
+      <a class="controller-link" href="control/" target="_blank" rel="noopener">Control ↗</a>
       <span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span>
     </header>
     <section class="main-display" aria-label="Time and current weather">
@@ -56,10 +63,11 @@
     </section>
     <footer class="footer">
       <div class="sunset"><span id="sun-icon" aria-hidden="true"></span><div><span class="eyebrow" id="sun-label">SUNSET</span><span id="sun-time" class="sun-time">--:--</span></div><span class="sun-caption" id="sun-caption">The day's last light</span></div>
-      <div class="connection"><button id="refresh" type="button" title="Refresh weather">Refresh weather <span aria-hidden="true">↻</span></button><p id="status" role="status">Getting the latest weather</p><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a></div>
+      <div class="connection"><button id="refresh" type="button" title="Refresh weather">Refresh weather <span aria-hidden="true">↻</span></button><p id="status" role="status">Getting the latest weather</p><a class="remote-link" href="control/" target="_blank" rel="noopener">Remote control</a> · <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a></div>
     </footer>
     <svg class="landscape" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100L130 64 210 89 345 29 459 96 560 72 690 120 820 57 930 99 1050 41 1200 84V180H0Z" fill="#263336"/><path d="M0 140Q180 70 340 134T650 136T950 125T1200 118V180H0Z" fill="#1e2a2e"/><path d="M0 160Q200 120 400 159T800 152T1200 153V180H0Z" fill="#19252a"/></svg>
   </main>
+  <p class="sync-indicator" id="sync-indicator" role="status" hidden></p>
   <noscript><p class="noscript">Enable JavaScript to display the clock and live weather.</p></noscript>
 </body>
 </html>

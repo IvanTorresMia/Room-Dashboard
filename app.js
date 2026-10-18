@@ -119,6 +119,7 @@
     if (!busy) { put('status', (failed ? 'Connection lost · ' : stale ? 'Saved weather · ' : 'Updated ') + time(savedAt, false)); }
   }
   function fetchWeather() {
+    if (window.RoomState && window.RoomState.get().view === 'clock') { return; }
     if (busy) { return; }
     busy = true; el('refresh').disabled = true; put('status', 'Updating weather…');
     var request = new XMLHttpRequest();
@@ -147,6 +148,11 @@
     if (cached && valid(cached.data) && typeof cached.savedAt === 'number' && cached.savedAt <= Date.now() && Date.now() - cached.savedAt < 86400000) { weather = cached.data; savedAt = cached.savedAt; }
   } catch (ignored) { /* The clock works even without storage. */ }
   el('refresh').addEventListener('click', fetchWeather);
+  if (window.RoomState) {
+    window.RoomState.subscribe(function () {
+      if (window.RoomState.get().view !== 'clock' && Date.now() - savedAt >= REFRESH_MS) { fetchWeather(); }
+    });
+  }
   window.addEventListener('online', fetchWeather);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { tick(); if (Date.now() - savedAt >= REFRESH_MS) { fetchWeather(); } } });
   tick(); fetchWeather();
