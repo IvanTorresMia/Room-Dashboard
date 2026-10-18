@@ -44,3 +44,13 @@ html[data-view="clock"] .landscape, html[data-view="glance"] .landscape { height
 
 .controller-link { color: inherit; font-size: 12px; font-weight: 600; text-decoration: none; padding: 12px 5px; }
 @media (max-width: 700px) { .controller-link { font-size: 12px; }.location { display: none; } }
+/* Pair inside the installed app; opening a Safari tab can use a different store. */
+.display-pair-overlay { position: fixed; top: 0; right: 0; bottom: 0; left: 0; padding: 24px; background: rgba(0,0,0,.72); z-index: 20; overflow-y: auto; display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; -webkit-justify-content: center; justify-content: center; }
+.display-pair-card { width: 100%; max-width: 520px; padding: 28px; background: #f7f6ed; color: #253b34; border-radius: 12px; font: 16px/1.5 -apple-system, BlinkMacSystemFont, Arial, sans-serif; }
+.display-pair-card h2 { margin: 0 0 12px; font-size: 26px; }
+.display-pair-card label { display: block; font-weight: 700; margin: 16px 0 7px; }
+.display-pair-card input { display: block; width: 100%; border: 1px solid #72877a; padding: 12px; font: 22px "Courier New", monospace; color: #253b34; background: #fff; border-radius: 5px; margin-bottom: 12px; }
+html .display-pair-card button { background: #284333; color: #fff; border: 1px solid #284333; box-shadow: none; min-height: 44px; border-radius: 6px; font-size: 15px; }
+.display-pair-card .pair-note { font-size: 13px; color: #52665a; }
+#display-pair-status { font-size: 15px; }
+@media (max-height: 600px) { .display-pair-overlay { -webkit-align-items: flex-start; align-items: flex-start; } }

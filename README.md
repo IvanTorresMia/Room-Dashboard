@@ -10,7 +10,9 @@ The **Content view** selector is independent of the face: **Clock** shows oversi
 
 Open `/control/` on your computer or phone. It has view, style, and light/dark controls, plus a live local preview. Paired devices synchronize through a small Cloudflare Worker and D1 database; the iPad keeps its own controls. The controller distinguishes sending, saved, offline, and confirmed-on-display states. Pairing is saved separately on each browser.
 
-On a connected controller, choose **Pair devices → Generate pairing code**. On the iPad, open `/control/`, enter that one-use code, connect, then follow **Ivan's Room** back to the dashboard. Repeat for your phone. Codes expire in ten minutes. Keep private pairing links private.
+On a connected controller, choose **Pair devices → Generate pairing code**. On the iPad dashboard, tap **Pair display** and enter that one-use code without leaving the dashboard. To pair another phone or computer as a controller, enter a fresh code on `/control/` and stay there to use its controls. Codes expire in ten minutes. Keep private pairing links private.
+
+**Home Screen on iOS:** Safari and the installed Home Screen app may keep separate local storage. Launch the dashboard from its Home Screen icon, tap **Pair display**, and enter a fresh code directly in that overlay. Pairing stays inside the running app; it does not open Safari. The header shows **Display paired** once credentials are saved. Pairing in Safari alone does not establish pairing in the installed app. After an update, fully close and reopen the Home Screen app to load the new controls. Remote polling resumes on visibility, focus, and page-show events.
 
 The deployment uses **Cloudflare Workers Free**, verified before deployment, and GitHub Pages. No paid plan, add-on, or custom domain is required. Do not upgrade either account for this project. If a free quota is reached, remote sync may fail until it resets; local controls remain available. See [backend/SETUP.md](backend/SETUP.md) for deployment, key rotation, limits, and recovery. Private credentials and pairing keys are excluded from Git.
 

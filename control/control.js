@@ -49,7 +49,7 @@
       var text = el('pair-code').value.trim();
       var config = window.RoomRemote.parse(text);
       if (config) { window.RoomRemote.connect(config); el('pair-code').value = ''; el('pair-error').textContent = ''; sharing(); }
-      else { window.RoomRemote.claim(text, function (error) { el('pair-error').textContent = error || 'Connected. Open the dashboard on this device when ready.'; if (!error) { el('pair-code').value = ''; sharing(); } }); }
+      else { window.RoomRemote.claim(text, function (error) { el('pair-error').textContent = error || 'Connected. To control the wall display, stay here and close Pair devices. Only open the dashboard on the device used as the display.'; if (!error) { el('pair-code').value = ''; sharing(); } }); }
     });
     el('create-code').addEventListener('click', function () {
       el('create-code').disabled = true;

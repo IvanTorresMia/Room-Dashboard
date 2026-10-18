@@ -15,9 +15,10 @@
   <script src="appearance.js?v=5"></script>
   <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet" href="faces.css?v=5">
-  <link rel="stylesheet" href="views.css?v=6">
+  <link rel="stylesheet" href="views.css?v=7">
   <script src="remote-config.js?v=5"></script>
-  <script src="remote.js?v=5" defer></script>
+  <script src="remote.js?v=7" defer></script>
+  <script src="display-pair.js?v=7" defer></script>
   <script src="app.js?v=5" defer></script>
 </head>
 <body>
@@ -40,7 +41,7 @@
         </div>
         <button id="mode-toggle" type="button" aria-label="Switch to light mode"><span id="mode-symbol" aria-hidden="true">☀</span><span id="mode-name">Light</span></button>
       </div>
-      <a class="controller-link" href="control/" target="_blank" rel="noopener">Control ↗</a>
+      <button class="controller-link" id="display-connection" type="button" aria-haspopup="dialog">Pair display</button>
       <span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span>
     </header>
     <section class="main-display" aria-label="Time and current weather">
@@ -67,6 +68,16 @@
     </footer>
     <svg class="landscape" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100L130 64 210 89 345 29 459 96 560 72 690 120 820 57 930 99 1050 41 1200 84V180H0Z" fill="#263336"/><path d="M0 140Q180 70 340 134T650 136T950 125T1200 118V180H0Z" fill="#1e2a2e"/><path d="M0 160Q200 120 400 159T800 152T1200 153V180H0Z" fill="#19252a"/></svg>
   </main>
+  <section class="display-pair-overlay" id="display-pair-panel" role="dialog" aria-modal="true" aria-labelledby="display-pair-title" hidden>
+    <div class="display-pair-card">
+      <h2 id="display-pair-title">Connect this display</h2>
+      <p>On your paired phone or computer, choose <strong>Pair devices → Generate pairing code</strong>. Enter the new code here.</p>
+      <p class="pair-note">If you use the Home Screen app, pair here inside that app. Safari and the Home Screen app can keep separate connections.</p>
+      <form id="display-pair-form"><label for="display-pair-code">Pairing code</label><input id="display-pair-code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required><button id="display-pair-submit" type="submit">Pair this display</button></form>
+      <p id="display-pair-status" role="status"></p>
+      <button id="display-pair-close" type="button">Close</button>
+    </div>
+  </section>
   <p class="sync-indicator" id="sync-indicator" role="status" hidden></p>
   <noscript><p class="noscript">Enable JavaScript to display the clock and live weather.</p></noscript>
 </body>

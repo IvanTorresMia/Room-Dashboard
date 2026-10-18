@@ -11,11 +11,13 @@
   var confirmed = -1;
   var seen = 0;
   var listeners = [];
+  var lastMessage = '';
   var controller = /\/control\/?(?:index\.html)?$/.test(location.pathname);
   function validConfig(value) {
     return value && typeof value.endpoint === 'string' && /^https:\/\/[a-z0-9-]+\.[a-z0-9.-]+\.workers\.dev$/.test(value.endpoint) && /^[a-f0-9]{64}$/.test(value.key);
   }
   function status(message) {
+    lastMessage = message;
     var indicator = document.getElementById('sync-indicator');
     if (indicator) { indicator.hidden = !message || message === 'Connected'; indicator.textContent = message; }
     for (var i = 0; i < listeners.length; i++) { listeners[i](message, { paired: !!config, revision: revision, confirmedRevision: confirmed, displaySeen: seen, pending: !!pending }); }
@@ -93,7 +95,7 @@
     },
     link: pairingLink,
     paired: function () { return !!config; },
-    subscribe: function (fn) { listeners.push(fn); },
+    subscribe: function (fn) { listeners.push(fn); if (lastMessage) { fn(lastMessage, { paired: !!config, revision: revision, confirmedRevision: confirmed, displaySeen: seen, pending: !!pending }); } },
     createCode: function (callback) {
       if (!config) { callback('Connect this device first'); return; }
       request('POST', '/pair', {}, function (code, data) {
@@ -132,9 +134,12 @@
       if (incoming) { connect(incoming); }
       try { history.replaceState(null, '', location.pathname + location.search); } catch (ignored) {}
     }
+    if (!config) { status(controller ? 'Not paired · changes stay on this device' : 'Not paired · tap Pair display'); }
     cycle();
   });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { cycle(); } });
   window.addEventListener('online', cycle);
+  window.addEventListener('pageshow', function () { ackAt = 0; cycle(); });
+  window.addEventListener('focus', cycle);
   setInterval(cycle, 5000);
 }());
