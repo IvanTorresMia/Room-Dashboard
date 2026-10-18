@@ -10,8 +10,9 @@
   <meta name="description" content="A quiet clock and weather dashboard for Redding, California.">
   <title>Ivan's Room · Redding</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <script src="appearance.js?v=2"></script>
-  <link rel="stylesheet" href="style.css?v=3">
+  <script src="appearance.js?v=4"></script>
+  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="faces.css?v=4">
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -19,7 +20,18 @@
     <header class="masthead">
       <span class="brand"><span class="brand-mark" aria-hidden="true">◒</span> IVAN'S ROOM</span>
       <div class="appearance-controls" role="group" aria-label="Dashboard appearance">
-        <button id="theme-toggle" type="button" aria-label="Change theme. Current theme: Calm"><span class="theme-swatch" aria-hidden="true"></span><span id="theme-name">Calm</span></button>
+        <div class="face-control">
+          <button id="theme-toggle" type="button" aria-label="Choose face. Current face: Calm" aria-expanded="false" aria-controls="face-picker"><span class="theme-swatch" aria-hidden="true"></span><span id="theme-name">Calm</span><span class="picker-arrow" aria-hidden="true">▾</span></button>
+          <nav id="face-picker" class="face-picker" aria-label="Choose a dashboard face" hidden>
+            <p class="picker-heading">PICK YOUR MOOD</p>
+            <button type="button" data-face="calm" aria-pressed="true"><span class="face-dot dot-calm" aria-hidden="true"></span><span><strong>Calm</strong><small>Warm tones · quiet landscape</small></span></button>
+            <button type="button" data-face="keycap" aria-pressed="false"><span class="face-dot dot-keycap" aria-hidden="true"></span><span><strong>Keycap</strong><small>Orange accents · keyboard inspired</small></span></button>
+            <button type="button" data-face="edition" aria-pressed="false"><span class="face-dot dot-edition" aria-hidden="true"></span><span><strong>Edition</strong><small>Bold serif · the daily weather edition</small></span></button>
+            <button type="button" data-face="terminal" aria-pressed="false"><span class="face-dot dot-terminal" aria-hidden="true"></span><span><strong>Terminal</strong><small>Green monochrome · instrument panel</small></span></button>
+            <button type="button" data-face="tide" aria-pressed="false"><span class="face-dot dot-tide" aria-hidden="true"></span><span><strong>Tide</strong><small>Ocean blues · soft rounded forms</small></span></button>
+            <p class="picker-note">Every face has a light &amp; dark mode.</p>
+          </nav>
+        </div>
         <button id="mode-toggle" type="button" aria-label="Switch to light mode"><span id="mode-symbol" aria-hidden="true">☀</span><span id="mode-name">Light</span></button>
       </div>
       <span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span>

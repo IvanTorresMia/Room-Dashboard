@@ -2,7 +2,7 @@
 
 A quiet, landscape clock and weather dashboard for an iPad 4 running iOS 10.3.4. Built with plain HTML, CSS, inline SVG, and ES5 JavaScript. No dependencies, build step, external fonts, or API keys.
 
-The header has two appearance controls: **Calm / Keycap** switches between the original landscape style and a keyboard-inspired gray/orange theme. **Light / Dark** switches brightness independently. Choices are remembered on each device when local storage is available. All four combinations use Safari 10-compatible CSS and JavaScript.
+The header's face button opens a compact picker: **Calm** (warm landscape), **Keycap** (gray/orange keyboard), **Edition** (serif newspaper), **Terminal** (green instrument panel), and **Tide** (blue rounded cards). **Light / Dark** switches brightness independently. Choices are remembered on each device when local storage is available, including existing Calm and Keycap preferences. The picker closes after a selection, an outside click, Escape, or focus leaving it. All ten combinations use Safari 10-compatible CSS and JavaScript; faces share one weather feed and require no extra fonts, libraries, or animation loops.
 
 ## Preview
 

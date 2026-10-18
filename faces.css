@@ -1,0 +1,118 @@
+/* Face picker stays above dashboard content and uses ordinary buttons for old Safari. */
+.masthead { z-index: 5; }
+.face-control { position: relative; }
+.appearance-controls .picker-arrow { margin-left: 9px; }
+.face-picker[hidden] { display: none; }
+.face-picker { position: absolute; top: 54px; left: 0; width: 310px; padding: 14px; background: #23312e; color: #f2eee4; border: 1px solid #63756a; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,.3); }
+.picker-heading { font: 700 12px Arial, sans-serif; letter-spacing: 2px; margin: 3px 8px 10px; }
+.appearance-controls .face-picker button { display: flex; display: -webkit-flex; -webkit-align-items: center; align-items: center; text-align: left; width: 100%; min-height: 57px; margin: 0 0 5px; padding: 8px 10px; border: 1px solid transparent; border-radius: 6px; box-shadow: none; background: transparent; color: inherit; }
+.appearance-controls .face-picker button[aria-pressed="true"] { border-color: currentColor; background: rgba(150,150,150,.15); }
+.face-picker strong, .face-picker small { display: block; font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; }
+.face-picker strong { font-size: 17px; font-weight: 700; }
+.face-picker small { font-size: 12px; font-weight: 400; margin-top: 3px; }
+.picker-note { font: 12px Arial, sans-serif; margin: 12px 8px 4px; }
+.appearance-controls .face-dot { display: block; -webkit-flex-shrink: 0; flex-shrink: 0; width: 13px; height: 24px; border-radius: 4px; margin-right: 12px; }
+.dot-calm { background: #dfb77b; }.dot-keycap { background: #f18b59; }.dot-edition { background: #d95c64; }.dot-terminal { background: #73c88a; }.dot-tide { background: #60bde9; }
+html[data-mode="light"] .face-picker { background: #f9faf5; color: #263e35; border-color: #97a69c; }
+html[data-theme="keycap"] .face-picker { background: #2c323b; color: #eceff2; border-color: #77808d; border-radius: 6px; }
+html[data-theme="keycap"][data-mode="light"] .face-picker { background: #f9faf8; color: #303942; }
+@media (max-width: 700px) { .face-control { -webkit-flex: 1; flex: 1; }.face-control>button { width: 100%; }.appearance-controls>.face-control+button { margin-left: 8px; }.face-picker { max-width: 85vw; } }
+html[data-theme="edition"][data-mode="dark"], html[data-theme="edition"][data-mode="dark"] body { background: #25211f; color: #f6edde; }
+html[data-theme="edition"][data-mode="dark"] .dashboard { background: #25211f; }
+html[data-theme="edition"][data-mode="dark"] .location, html[data-theme="edition"][data-mode="dark"] .eyebrow, html[data-theme="edition"][data-mode="dark"] .section-heading h1, html[data-theme="edition"][data-mode="dark"] .unit, html[data-theme="edition"][data-mode="dark"] .high-low, html[data-theme="edition"][data-mode="dark"] .feels-like, html[data-theme="edition"][data-mode="dark"] .section-heading>span, html[data-theme="edition"][data-mode="dark"] .forecast-time, html[data-theme="edition"][data-mode="dark"] .forecast-placeholder, html[data-theme="edition"][data-mode="dark"] .connection, html[data-theme="edition"][data-mode="dark"] .connection a { color: #d0c0ae; }
+html[data-theme="edition"][data-mode="dark"] .date, html[data-theme="edition"][data-mode="dark"] .meridiem, html[data-theme="edition"][data-mode="dark"] .high-low span, html[data-theme="edition"][data-mode="dark"] button { color: #f6edde; }
+html[data-theme="edition"][data-mode="dark"] .brand-mark, html[data-theme="edition"][data-mode="dark"] .current-icon, html[data-theme="edition"][data-mode="dark"] .forecast-icon, html[data-theme="edition"][data-mode="dark"] #sun-icon { color: #f1938c; }
+html[data-theme="edition"][data-mode="dark"] .theme-swatch, html[data-theme="edition"][data-mode="dark"] .location-dot { background: #f1938c; }
+html[data-theme="edition"][data-mode="dark"] .weather-panel, html[data-theme="edition"][data-mode="dark"] .outlook, html[data-theme="edition"][data-mode="dark"] .footer, html[data-theme="edition"][data-mode="dark"] .forecast-hour, html[data-theme="edition"][data-mode="dark"] button { border-color: #6e5c51; }
+html[data-theme="edition"][data-mode="dark"] .face-picker { background: #312a26; color: #f6edde; border-color: #6e5c51; }
+html[data-theme="edition"][data-mode="dark"] button:focus, html[data-theme="edition"][data-mode="dark"] a:focus { outline-color: #f1938c; }
+html[data-theme="edition"][data-mode="light"], html[data-theme="edition"][data-mode="light"] body { background: #f5f0e5; color: #29251f; }
+html[data-theme="edition"][data-mode="light"] .dashboard { background: #f5f0e5; }
+html[data-theme="edition"][data-mode="light"] .location, html[data-theme="edition"][data-mode="light"] .eyebrow, html[data-theme="edition"][data-mode="light"] .section-heading h1, html[data-theme="edition"][data-mode="light"] .unit, html[data-theme="edition"][data-mode="light"] .high-low, html[data-theme="edition"][data-mode="light"] .feels-like, html[data-theme="edition"][data-mode="light"] .section-heading>span, html[data-theme="edition"][data-mode="light"] .forecast-time, html[data-theme="edition"][data-mode="light"] .forecast-placeholder, html[data-theme="edition"][data-mode="light"] .connection, html[data-theme="edition"][data-mode="light"] .connection a { color: #625346; }
+html[data-theme="edition"][data-mode="light"] .date, html[data-theme="edition"][data-mode="light"] .meridiem, html[data-theme="edition"][data-mode="light"] .high-low span, html[data-theme="edition"][data-mode="light"] button { color: #29251f; }
+html[data-theme="edition"][data-mode="light"] .brand-mark, html[data-theme="edition"][data-mode="light"] .current-icon, html[data-theme="edition"][data-mode="light"] .forecast-icon, html[data-theme="edition"][data-mode="light"] #sun-icon { color: #a52e38; }
+html[data-theme="edition"][data-mode="light"] .theme-swatch, html[data-theme="edition"][data-mode="light"] .location-dot { background: #a52e38; }
+html[data-theme="edition"][data-mode="light"] .weather-panel, html[data-theme="edition"][data-mode="light"] .outlook, html[data-theme="edition"][data-mode="light"] .footer, html[data-theme="edition"][data-mode="light"] .forecast-hour, html[data-theme="edition"][data-mode="light"] button { border-color: #b8aa96; }
+html[data-theme="edition"][data-mode="light"] .face-picker { background: #fffbf2; color: #29251f; border-color: #b8aa96; }
+html[data-theme="edition"][data-mode="light"] button:focus, html[data-theme="edition"][data-mode="light"] a:focus { outline-color: #a52e38; }
+html[data-theme="terminal"][data-mode="dark"], html[data-theme="terminal"][data-mode="dark"] body { background: #101c16; color: #d6f6d4; }
+html[data-theme="terminal"][data-mode="dark"] .dashboard { background: #101c16; }
+html[data-theme="terminal"][data-mode="dark"] .location, html[data-theme="terminal"][data-mode="dark"] .eyebrow, html[data-theme="terminal"][data-mode="dark"] .section-heading h1, html[data-theme="terminal"][data-mode="dark"] .unit, html[data-theme="terminal"][data-mode="dark"] .high-low, html[data-theme="terminal"][data-mode="dark"] .feels-like, html[data-theme="terminal"][data-mode="dark"] .section-heading>span, html[data-theme="terminal"][data-mode="dark"] .forecast-time, html[data-theme="terminal"][data-mode="dark"] .forecast-placeholder, html[data-theme="terminal"][data-mode="dark"] .connection, html[data-theme="terminal"][data-mode="dark"] .connection a { color: #a0c6a3; }
+html[data-theme="terminal"][data-mode="dark"] .date, html[data-theme="terminal"][data-mode="dark"] .meridiem, html[data-theme="terminal"][data-mode="dark"] .high-low span, html[data-theme="terminal"][data-mode="dark"] button { color: #d6f6d4; }
+html[data-theme="terminal"][data-mode="dark"] .brand-mark, html[data-theme="terminal"][data-mode="dark"] .current-icon, html[data-theme="terminal"][data-mode="dark"] .forecast-icon, html[data-theme="terminal"][data-mode="dark"] #sun-icon { color: #8ce9a3; }
+html[data-theme="terminal"][data-mode="dark"] .theme-swatch, html[data-theme="terminal"][data-mode="dark"] .location-dot { background: #8ce9a3; }
+html[data-theme="terminal"][data-mode="dark"] .weather-panel, html[data-theme="terminal"][data-mode="dark"] .outlook, html[data-theme="terminal"][data-mode="dark"] .footer, html[data-theme="terminal"][data-mode="dark"] .forecast-hour, html[data-theme="terminal"][data-mode="dark"] button { border-color: #48694f; }
+html[data-theme="terminal"][data-mode="dark"] .face-picker { background: #182c20; color: #d6f6d4; border-color: #48694f; }
+html[data-theme="terminal"][data-mode="dark"] button:focus, html[data-theme="terminal"][data-mode="dark"] a:focus { outline-color: #8ce9a3; }
+html[data-theme="terminal"][data-mode="light"], html[data-theme="terminal"][data-mode="light"] body { background: #edf3e7; color: #173c26; }
+html[data-theme="terminal"][data-mode="light"] .dashboard { background: #edf3e7; }
+html[data-theme="terminal"][data-mode="light"] .location, html[data-theme="terminal"][data-mode="light"] .eyebrow, html[data-theme="terminal"][data-mode="light"] .section-heading h1, html[data-theme="terminal"][data-mode="light"] .unit, html[data-theme="terminal"][data-mode="light"] .high-low, html[data-theme="terminal"][data-mode="light"] .feels-like, html[data-theme="terminal"][data-mode="light"] .section-heading>span, html[data-theme="terminal"][data-mode="light"] .forecast-time, html[data-theme="terminal"][data-mode="light"] .forecast-placeholder, html[data-theme="terminal"][data-mode="light"] .connection, html[data-theme="terminal"][data-mode="light"] .connection a { color: #365c40; }
+html[data-theme="terminal"][data-mode="light"] .date, html[data-theme="terminal"][data-mode="light"] .meridiem, html[data-theme="terminal"][data-mode="light"] .high-low span, html[data-theme="terminal"][data-mode="light"] button { color: #173c26; }
+html[data-theme="terminal"][data-mode="light"] .brand-mark, html[data-theme="terminal"][data-mode="light"] .current-icon, html[data-theme="terminal"][data-mode="light"] .forecast-icon, html[data-theme="terminal"][data-mode="light"] #sun-icon { color: #21633b; }
+html[data-theme="terminal"][data-mode="light"] .theme-swatch, html[data-theme="terminal"][data-mode="light"] .location-dot { background: #21633b; }
+html[data-theme="terminal"][data-mode="light"] .weather-panel, html[data-theme="terminal"][data-mode="light"] .outlook, html[data-theme="terminal"][data-mode="light"] .footer, html[data-theme="terminal"][data-mode="light"] .forecast-hour, html[data-theme="terminal"][data-mode="light"] button { border-color: #92b29a; }
+html[data-theme="terminal"][data-mode="light"] .face-picker { background: #f9fff4; color: #173c26; border-color: #92b29a; }
+html[data-theme="terminal"][data-mode="light"] button:focus, html[data-theme="terminal"][data-mode="light"] a:focus { outline-color: #21633b; }
+html[data-theme="tide"][data-mode="dark"], html[data-theme="tide"][data-mode="dark"] body { background: #122535; color: #e1f4ff; }
+html[data-theme="tide"][data-mode="dark"] .dashboard { background: #122535; }
+html[data-theme="tide"][data-mode="dark"] .location, html[data-theme="tide"][data-mode="dark"] .eyebrow, html[data-theme="tide"][data-mode="dark"] .section-heading h1, html[data-theme="tide"][data-mode="dark"] .unit, html[data-theme="tide"][data-mode="dark"] .high-low, html[data-theme="tide"][data-mode="dark"] .feels-like, html[data-theme="tide"][data-mode="dark"] .section-heading>span, html[data-theme="tide"][data-mode="dark"] .forecast-time, html[data-theme="tide"][data-mode="dark"] .forecast-placeholder, html[data-theme="tide"][data-mode="dark"] .connection, html[data-theme="tide"][data-mode="dark"] .connection a { color: #adc9dd; }
+html[data-theme="tide"][data-mode="dark"] .date, html[data-theme="tide"][data-mode="dark"] .meridiem, html[data-theme="tide"][data-mode="dark"] .high-low span, html[data-theme="tide"][data-mode="dark"] button { color: #e1f4ff; }
+html[data-theme="tide"][data-mode="dark"] .brand-mark, html[data-theme="tide"][data-mode="dark"] .current-icon, html[data-theme="tide"][data-mode="dark"] .forecast-icon, html[data-theme="tide"][data-mode="dark"] #sun-icon { color: #82d4ff; }
+html[data-theme="tide"][data-mode="dark"] .theme-swatch, html[data-theme="tide"][data-mode="dark"] .location-dot { background: #82d4ff; }
+html[data-theme="tide"][data-mode="dark"] .weather-panel, html[data-theme="tide"][data-mode="dark"] .outlook, html[data-theme="tide"][data-mode="dark"] .footer, html[data-theme="tide"][data-mode="dark"] .forecast-hour, html[data-theme="tide"][data-mode="dark"] button { border-color: #42657d; }
+html[data-theme="tide"][data-mode="dark"] .face-picker { background: #203b50; color: #e1f4ff; border-color: #42657d; }
+html[data-theme="tide"][data-mode="dark"] button:focus, html[data-theme="tide"][data-mode="dark"] a:focus { outline-color: #82d4ff; }
+html[data-theme="tide"][data-mode="dark"] .forecast-hour { background: #203b50; }
+html[data-theme="tide"][data-mode="light"], html[data-theme="tide"][data-mode="light"] body { background: #edf5fa; color: #173d56; }
+html[data-theme="tide"][data-mode="light"] .dashboard { background: #edf5fa; }
+html[data-theme="tide"][data-mode="light"] .location, html[data-theme="tide"][data-mode="light"] .eyebrow, html[data-theme="tide"][data-mode="light"] .section-heading h1, html[data-theme="tide"][data-mode="light"] .unit, html[data-theme="tide"][data-mode="light"] .high-low, html[data-theme="tide"][data-mode="light"] .feels-like, html[data-theme="tide"][data-mode="light"] .section-heading>span, html[data-theme="tide"][data-mode="light"] .forecast-time, html[data-theme="tide"][data-mode="light"] .forecast-placeholder, html[data-theme="tide"][data-mode="light"] .connection, html[data-theme="tide"][data-mode="light"] .connection a { color: #46647a; }
+html[data-theme="tide"][data-mode="light"] .date, html[data-theme="tide"][data-mode="light"] .meridiem, html[data-theme="tide"][data-mode="light"] .high-low span, html[data-theme="tide"][data-mode="light"] button { color: #173d56; }
+html[data-theme="tide"][data-mode="light"] .brand-mark, html[data-theme="tide"][data-mode="light"] .current-icon, html[data-theme="tide"][data-mode="light"] .forecast-icon, html[data-theme="tide"][data-mode="light"] #sun-icon { color: #146c98; }
+html[data-theme="tide"][data-mode="light"] .theme-swatch, html[data-theme="tide"][data-mode="light"] .location-dot { background: #146c98; }
+html[data-theme="tide"][data-mode="light"] .weather-panel, html[data-theme="tide"][data-mode="light"] .outlook, html[data-theme="tide"][data-mode="light"] .footer, html[data-theme="tide"][data-mode="light"] .forecast-hour, html[data-theme="tide"][data-mode="light"] button { border-color: #aac7d8; }
+html[data-theme="tide"][data-mode="light"] .face-picker { background: #ffffff; color: #173d56; border-color: #aac7d8; }
+html[data-theme="tide"][data-mode="light"] button:focus, html[data-theme="tide"][data-mode="light"] a:focus { outline-color: #146c98; }
+html[data-theme="tide"][data-mode="light"] .forecast-hour { background: #ffffff; }
+
+/* Edition: a serif masthead and clock with newspaper rules and a restrained red accent. */
+[data-theme="edition"] .clock { font-family: Georgia, "Times New Roman", serif; font-size: 15.5vw; font-weight: 700; letter-spacing: -7px; }
+[data-theme="edition"] .brand { font-family: Georgia, "Times New Roman", serif; font-size: 19px; letter-spacing: 0; }
+[data-theme="edition"] .brand-mark { display: none; }
+[data-theme="edition"] .date { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+[data-theme="edition"] .masthead { border-bottom: 3px double; padding-bottom: 12px; }
+[data-theme="edition"] .outlook { border-top: 3px double; }
+[data-theme="edition"] .forecast-temp, [data-theme="edition"] .sun-time { font-family: Georgia, "Times New Roman", serif; }
+[data-theme="edition"] button { border-radius: 2px; }
+/* Terminal: static instrument markings, no animation or glow effects. */
+[data-theme="terminal"] body { font-family: "Courier New", Courier, monospace; }
+[data-theme="terminal"] .clock { font-size: 13vw; font-weight: 700; letter-spacing: -7px; }
+[data-theme="terminal"] .brand { letter-spacing: 1px; }
+[data-theme="terminal"] .brand-mark { font-size: 0; }
+[data-theme="terminal"] .brand-mark:after { content: ">_"; font-size: 20px; }
+[data-theme="terminal"] .date { font-size: 24px; font-weight: 700; }
+[data-theme="terminal"] .outlook, [data-theme="terminal"] .footer { border-top-style: dashed; }
+[data-theme="terminal"] .weather-panel { border-left-style: dashed; }
+[data-theme="terminal"] button { border-radius: 0; }
+[data-theme="terminal"] .condition { font-size: 21px; font-weight: 700; }
+[data-theme="terminal"] .high-low { font-size: 12px; }
+[data-theme="terminal"] .high-low span { font-size: 19px; }
+[data-theme="terminal"] .high-low .divider { padding-left: 4px; padding-right: 4px; }
+/* Tide: rounded cards and a soft, open clock. */
+[data-theme="tide"] .clock { font-family: "Trebuchet MS", -apple-system, Arial, sans-serif; font-weight: 700; letter-spacing: -6px; }
+[data-theme="tide"] .forecast-hour { width: 15%; border: 0; border-radius: 18px; padding: 10px 0; }
+[data-theme="tide"] .brand { letter-spacing: 2px; }
+[data-theme="tide"] .brand-mark { font-size: 0; }
+[data-theme="tide"] .brand-mark:after { content: "≈"; font-size: 30px; }
+[data-theme="edition"] .landscape, [data-theme="terminal"] .landscape, [data-theme="tide"] .landscape { display: none; }
+@media (min-width: 1200px) { [data-theme="edition"] .clock { font-size: 186px; }[data-theme="terminal"] .clock { font-size: 156px; } }
+@media (max-height: 710px) and (min-width: 701px) {
+ [data-theme="edition"] .main-display { padding-top: 4px; padding-bottom: 4px; min-height: 268px; }
+ [data-theme="tide"] .forecast-hour { padding-top: 5px; padding-bottom: 5px; }
+}
+@media (max-width: 700px) {
+ [data-theme="edition"] .clock, [data-theme="tide"] .clock { font-size: 23vw; }
+ [data-theme="terminal"] .clock { font-size: 20vw; }
+ [data-theme="terminal"] .date { font-size: 22px; }
+ [data-theme="tide"] .forecast-hour { width: 15.7%; border-radius: 10px; }
+ [data-theme="edition"] .brand { font-size: 17px; }
+}
