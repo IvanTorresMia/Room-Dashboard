@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Room">
+  <meta name="theme-color" content="#171e23">
+  <meta name="description" content="A quiet clock and weather dashboard for Redding, California.">
+  <title>Room · Redding</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="dashboard">
+    <header class="masthead"><span class="brand"><span class="brand-mark" aria-hidden="true">◒</span> ROOM</span><span class="location">REDDING, CALIFORNIA <span class="location-dot" aria-hidden="true"></span></span></header>
+    <section class="main-display" aria-label="Time and current weather">
+      <div class="clock-panel">
+        <p class="eyebrow" id="greeting">MAKE YOURSELF AT HOME</p>
+        <div class="clock"><span id="clock">--:--</span><span class="meridiem" id="meridiem">&nbsp;</span></div>
+        <p class="date" id="date">Redding local time</p>
+      </div>
+      <div class="weather-panel">
+        <div id="current-icon" class="current-icon" aria-hidden="true"></div>
+        <div class="temperature"><span id="temperature">--</span><span class="degree">°</span><span class="unit">F</span></div>
+        <p id="condition" class="condition">Connecting to the sky…</p>
+        <p class="high-low">HIGH <span id="high">--°</span><span class="divider">/</span> LOW <span id="low">--°</span></p>
+        <p class="feels-like" id="feels-like">Weather for Redding</p>
+      </div>
+    </section>
+    <section class="outlook" aria-label="Hourly forecast">
+      <div class="section-heading"><h1>THE NEXT FEW HOURS</h1><span id="forecast-note">A little look ahead</span></div>
+      <div class="forecast" id="forecast"><p class="forecast-placeholder">Your forecast will appear here.</p></div>
+    </section>
+    <footer class="footer">
+      <div class="sunset"><span id="sun-icon" aria-hidden="true"></span><div><span class="eyebrow" id="sun-label">SUNSET</span><span id="sun-time" class="sun-time">--:--</span></div><span class="sun-caption" id="sun-caption">The day's last light</span></div>
+      <div class="connection"><button id="refresh" type="button" title="Refresh weather">Refresh weather <span aria-hidden="true">↻</span></button><p id="status" role="status">Getting the latest weather</p><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a></div>
+    </footer>
+    <svg class="landscape" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100L130 64 210 89 345 29 459 96 560 72 690 120 820 57 930 99 1050 41 1200 84V180H0Z" fill="#263336"/><path d="M0 140Q180 70 340 134T650 136T950 125T1200 118V180H0Z" fill="#1e2a2e"/><path d="M0 160Q200 120 400 159T800 152T1200 153V180H0Z" fill="#19252a"/></svg>
+  </main>
+  <noscript><p class="noscript">Enable JavaScript to display the clock and live weather.</p></noscript>
+</body>
+</html>
