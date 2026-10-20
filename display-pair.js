@@ -14,7 +14,7 @@
       // An old cached document may fetch this newer script. Give it an update path too.
       updateLink = document.createElement('a');
       updateLink.id = 'update-display'; updateLink.className = 'display-update';
-      updateLink.href = '?display-update=9'; updateLink.textContent = 'Update display';
+      updateLink.href = '?display-update=10'; updateLink.textContent = 'Update display';
       close.parentNode.insertBefore(updateLink, close);
     }
     updateLink.addEventListener('click', function () {

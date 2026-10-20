@@ -3,12 +3,16 @@
   function el(id) { return document.getElementById(id); }
   function update() {
     var state = window.RoomState.get();
-    var buttons = document.querySelectorAll('[data-view], [data-theme], [data-mode]');
+    var buttons = document.querySelectorAll('button[data-view], button[data-theme], button[data-mode], button[data-palette]');
     for (var i = 0; i < buttons.length; i++) {
-      var kind = buttons[i].hasAttribute('data-view') ? 'view' : buttons[i].hasAttribute('data-theme') ? 'theme' : 'mode';
+      var kind = buttons[i].hasAttribute('data-view') ? 'view' : buttons[i].hasAttribute('data-theme') ? 'theme' : buttons[i].hasAttribute('data-palette') ? 'palette' : 'mode';
       buttons[i].setAttribute('aria-pressed', buttons[i].getAttribute('data-' + kind) === state[kind] ? 'true' : 'false');
     }
-    el('selection-summary').textContent = state.view + ' · ' + state.theme + ' · ' + state.mode;
+    var palette = state.palette || 'recommended';
+    el('selection-summary').textContent = state.view + ' · ' + window.RoomThemes.faces[state.theme].name + ' · ' + window.RoomThemes.palettes[palette].name + ' · ' + state.mode;
+    el('recommended-swatch').style.background = window.RoomThemes.faces[state.theme][state.mode];
+    el('recommended-note').textContent = window.RoomThemes.faces[state.theme].name + '’s original colors';
+    el('palette-reset').hidden = palette === 'recommended';
   }
   function fitPreview() {
     var width = el('preview-wrap').clientWidth;
@@ -23,14 +27,15 @@
     el('connection-toggle').textContent = paired ? 'Pair devices' : 'Connect';
   }
   document.addEventListener('DOMContentLoaded', function () {
-    var buttons = document.querySelectorAll('[data-view], [data-theme], [data-mode]');
+    var buttons = document.querySelectorAll('button[data-view], button[data-theme], button[data-mode], button[data-palette]');
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].addEventListener('click', function () {
         var state = window.RoomState.get();
-        var kind = this.hasAttribute('data-view') ? 'view' : this.hasAttribute('data-theme') ? 'theme' : 'mode';
+        var kind = this.hasAttribute('data-view') ? 'view' : this.hasAttribute('data-theme') ? 'theme' : this.hasAttribute('data-palette') ? 'palette' : 'mode';
         state[kind] = this.getAttribute('data-' + kind); window.RoomState.set(state);
       });
     }
+    el('palette-reset').addEventListener('click', function () { var state = window.RoomState.get(); state.palette = 'recommended'; window.RoomState.set(state); });
     window.RoomState.subscribe(update);
     window.RoomRemote.subscribe(function (message, details) {
       el('remote-status').textContent = message;

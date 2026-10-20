@@ -8,19 +8,21 @@
   <meta name="apple-mobile-web-app-title" content="Ivan's Room">
   <meta name="theme-color" content="#171e23">
   <meta name="referrer" content="no-referrer">
+<meta id="appearance-capability" name="room-appearance-version" content="2">
   <meta name="description" content="A quiet clock and weather dashboard for Redding, California.">
   <title>Ivan's Room · Redding</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <script src="theme-catalog.js?v=8"></script>
-  <script src="state.js?v=9"></script>
-  <script src="appearance.js?v=9"></script>
+  <script src="theme-catalog.js?v=10"></script>
+  <script src="state.js?v=10"></script>
+  <script src="appearance.js?v=10"></script>
   <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet" href="faces.css?v=5">
   <link rel="stylesheet" href="views.css?v=9">
   <link rel="stylesheet" href="themes.css?v=8">
+  <link rel="stylesheet" href="palettes.css?v=10">
   <script src="remote-config.js?v=5"></script>
-  <script src="remote.js?v=9" defer></script>
-  <script src="display-pair.js?v=9" defer></script>
+  <script src="remote.js?v=10" defer></script>
+  <script src="display-pair.js?v=10" defer></script>
   <script src="app.js?v=5" defer></script>
 </head>
 <body>
@@ -41,6 +43,9 @@
             <button type="button" data-face="meridian" aria-pressed="false"><span class="face-dot dot-meridian" aria-hidden="true"></span><span><strong>Meridian</strong><small>Warm geometry · a quiet graphic poster</small></span></button>
             <button type="button" data-face="atelier" aria-pressed="false"><span class="face-dot dot-atelier" aria-hidden="true"></span><span><strong>Atelier</strong><small>Serif dial · a modern mantelpiece</small></span></button>
             <button type="button" data-face="platform" aria-pressed="false"><span class="face-dot dot-platform" aria-hidden="true"></span><span><strong>Platform</strong><small>Cobalt signage · order at a glance</small></span></button>
+            <label class="palette-label" for="palette-select">COLOR PALETTE</label>
+            <select id="palette-select"><option value="recommended">Recommended for this face</option><option value="orange">Signal Orange</option><option value="blue">Ion Blue</option><option value="red">Laser Red</option><option value="green">Phosphor Green</option></select>
+            <button type="button" class="palette-reset" id="palette-reset" hidden>Use recommended colors</button>
             <p class="picker-note">Every face has a light &amp; dark mode.</p>
           </nav>
         </div>
@@ -80,8 +85,8 @@
       <p class="pair-note">If you use the Home Screen app, pair here inside that app. Safari and the Home Screen app can keep separate connections.</p>
       <form id="display-pair-form"><label for="display-pair-code">Pairing code</label><input id="display-pair-code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required><button id="display-pair-submit" type="submit">Pair this display</button></form>
       <p id="display-pair-status" role="status"></p>
-      <p class="pair-note">Display version 9 · 8 faces. Updating keeps this app’s saved pairing.</p>
-      <a class="display-update" id="update-display" href="?display-update=9">Update display</a>
+      <p class="pair-note">Display version 10 · 8 faces · 5 palettes. Updating keeps this app’s saved pairing.</p>
+      <a class="display-update" id="update-display" href="?display-update=10">Update display</a>
       <button id="display-pair-close" type="button">Close</button>
     </div>
   </section>

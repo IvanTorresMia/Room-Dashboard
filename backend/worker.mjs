@@ -2,19 +2,25 @@ import catalog from '../theme-catalog.js';
 const THEMES = catalog.ids;
 const VIEWS = ['clock', 'glance', 'weather'];
 export function validState(value) {
-  return value && Object.keys(value).length === 3 && THEMES.includes(value.theme) && VIEWS.includes(value.view) && ['light', 'dark'].includes(value.mode);
+  return value && [3, 4].includes(Object.keys(value).length) && Object.keys(value).every(key => ['theme','view','mode','palette'].includes(key)) && THEMES.includes(value.theme) && VIEWS.includes(value.view) && ['light', 'dark'].includes(value.mode) && (value.palette === undefined || catalog.paletteIds.includes(value.palette));
 }
-function unpack(row) {
-  return { settings: JSON.parse(row.settings), revision: row.revision, confirmedRevision: row.confirmed_revision, displaySeen: row.display_seen };
+function unpack(row, modern) {
+  const settings = JSON.parse(row.settings);
+  if (modern) settings.palette = settings.palette || 'recommended';
+  else delete settings.palette;
+  return { settings, revision: row.revision, confirmedRevision: row.confirmed_revision, displaySeen: row.display_seen };
 }
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
     const allowed = [env.ALLOWED_ORIGIN || 'https://ivantorresmia.github.io', 'http://127.0.0.1:8765', 'http://localhost:8765'];
-    const cors = { 'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0], 'Vary': 'Origin', 'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type', 'Access-Control-Max-Age': '86400', 'Cache-Control': 'no-store' };
+    const cors = { 'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0], 'Vary': 'Origin', 'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Authorization, Content-Type, X-Room-Appearance-Version', 'Access-Control-Max-Age': '86400', 'Cache-Control': 'no-store' };
     const reply = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } });
     if (origin && !allowed.includes(origin)) return reply({ error: 'Origin not allowed' }, 403);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+    const modern = request.headers.get('X-Room-Appearance-Version') === '2';
+    const needsUpdate = row => !modern && (JSON.parse(row.settings).palette || 'recommended') !== 'recommended';
+    const settingsReply = (row, status = 200) => needsUpdate(row) ? reply({ error: 'Display update required for color palettes' }, 426) : reply(unpack(row, modern), status);
     const path = new URL(request.url).pathname;
     if (path === '/health' && request.method === 'GET') return reply({ ok: true });
     if (!['/settings', '/ack', '/pair', '/claim'].includes(path)) return reply({ error: 'Not found' }, 404);
@@ -49,7 +55,7 @@ export default {
         return reply({ code: code.match(/.{4}/g).join('-') });
       }
       if (path === '/settings' && request.method === 'GET') {
-        return reply(unpack(await env.DB.prepare('SELECT * FROM room WHERE id = 1').first()));
+        return settingsReply(await env.DB.prepare('SELECT * FROM room WHERE id = 1').first());
       }
       if (request.method !== 'PUT' && request.method !== 'POST') return reply({ error: 'Method not allowed' }, 405);
       const text = await request.text();
@@ -58,14 +64,19 @@ export default {
       try { body = JSON.parse(text); } catch { return reply({ error: 'Invalid JSON' }, 400); }
       if (!body || !Number.isSafeInteger(body.revision) || body.revision < 0) return reply({ error: 'Invalid revision' }, 400);
       if (path === '/ack' && request.method === 'POST') {
+        if (needsUpdate(await env.DB.prepare('SELECT * FROM room WHERE id = 1').first())) return reply({ error: 'Display update required for color palettes' }, 426);
         await env.DB.prepare('UPDATE room SET confirmed_revision = ?, display_seen = ? WHERE id = 1 AND revision = ?').bind(body.revision, Date.now(), body.revision).run();
         return reply({ ok: true });
       }
       if (path === '/settings' && request.method === 'PUT') {
         if (!validState(body.settings)) return reply({ error: 'Invalid settings' }, 400);
-        const changed = await env.DB.prepare('UPDATE room SET settings = ?, revision = revision + 1 WHERE id = 1 AND revision = ?').bind(JSON.stringify(body.settings), body.revision).run();
+        if (!modern && body.settings.palette && body.settings.palette !== 'recommended') return reply({ error: 'Update this controller for color palettes' }, 426);
+        const prior = await env.DB.prepare('SELECT * FROM room WHERE id = 1').first();
+        if (needsUpdate(prior)) return reply({ error: 'Update this controller for color palettes' }, 426);
+        const settings = { ...body.settings, palette: body.settings.palette || 'recommended' };
+        const changed = await env.DB.prepare('UPDATE room SET settings = ?, revision = revision + 1 WHERE id = 1 AND revision = ?').bind(JSON.stringify(settings), body.revision).run();
         const row = await env.DB.prepare('SELECT * FROM room WHERE id = 1').first();
-        return reply(unpack(row), changed.meta.changes ? 200 : 409);
+        return settingsReply(row, changed.meta.changes ? 200 : 409);
       }
       return reply({ error: 'Method not allowed' }, 405);
     } catch {

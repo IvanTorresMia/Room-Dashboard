@@ -27,6 +27,10 @@
     xhr.open(method, config.endpoint + path, true);
     xhr.timeout = 12000;
     xhr.setRequestHeader('Authorization', 'Bearer ' + config.key);
+    var capability = document.getElementById('appearance-capability');
+    if (window.RoomState.appearanceVersion === 2 && capability && capability.getAttribute('content') === '2') {
+      xhr.setRequestHeader('X-Room-Appearance-Version', '2');
+    }
     if (body) { xhr.setRequestHeader('Content-Type', 'application/json'); }
     xhr.onload = function () {
       var data;
@@ -45,7 +49,7 @@
     var active = generation;
     request('GET', '/settings', null, function (code, data) {
       if (active !== generation) { return; }
-      if (code !== 200) { busy = false; status(code === 401 ? 'Pairing expired · reconnect this device' : 'Offline · local controls still work'); return; }
+      if (code !== 200) { busy = false; status(code === 401 ? 'Pairing expired · reconnect this device' : code === 426 ? (controller ? 'Palette update needed · reload this controller' : 'Palette update needed · tap Display paired, then Update display') : 'Offline · local controls still work'); return; }
       if (!accept(data)) {
         busy = false;
         status(controller ? 'Settings not supported · reload this controller' : 'Display update needed · tap Display paired, then Update display');

@@ -12,13 +12,17 @@ const DB = { prepare(query) {
 const key = 'a'.repeat(64);
 const endpoint = 'https://ivans-room-remote.example.workers.dev';
 const env = { DB, ROOM_KEY: key };
-async function api(path, method = 'GET', body, token = key, origin = 'https://ivantorresmia.github.io') {
+async function api(path, method = 'GET', body, token = key, origin = 'https://ivantorresmia.github.io', version = '2') {
   const headers = { Origin: origin };
+  if (version) headers['X-Room-Appearance-Version'] = version;
   if (token) headers.Authorization = 'Bearer ' + token;
   if (body) headers['Content-Type'] = 'application/json';
   const response = await worker.fetch(new Request(endpoint + path, { method, headers, body: body ? JSON.stringify(body) : undefined }), env);
   return { status: response.status, body: await response.json() };
 }
+const preflight = await worker.fetch(new Request(endpoint+'/settings',{method:'OPTIONS',headers:{Origin:'https://ivantorresmia.github.io','Access-Control-Request-Headers':'authorization,x-room-appearance-version'}}),env);
+assert.equal(preflight.status,204);
+assert.match(preflight.headers.get('Access-Control-Allow-Headers'),/X-Room-Appearance-Version/);
 assert.equal((await api('/settings', 'GET', null, '')).status, 401);
 assert.equal((await api('/settings', 'GET', null, 'b'.repeat(64))).status, 401);
 assert.equal((await api('/settings', 'GET', null, key, 'https://example.org')).status, 403);
@@ -41,12 +45,12 @@ code = (await api('/pair', 'POST', {})).body.code.replace(/-/g, '');
 sql.exec('UPDATE pairing SET expires = 0');
 assert.equal((await api('/claim', 'POST', {code}, '')).status, 401);
 const promises = [];
-function device(controller, storageEnabled = true) {
+function device(controller, storageEnabled = true, modernDocument = true) {
   const events = {};
   const intervals = [];
   const storage = {'room-appearance-v1': JSON.stringify({theme:'keycap',mode:'light'}), 'room-remote-v1': JSON.stringify({endpoint,key})};
   let offline = false;
-  const document = {hidden:false, getElementById() { return null; }, addEventListener(name, callback) { (events[name] ||= []).push(callback); }};
+  const document = {hidden:false, getElementById(id) { return modernDocument && id === 'appearance-capability' ? {getAttribute(){return '2';}} : null; }, addEventListener(name, callback) { (events[name] ||= []).push(callback); }};
   const window = { addEventListener(name, callback) { (events[name] ||= []).push(callback); }};
   function XHR() { this.headers = {Origin:'https://ivantorresmia.github.io'}; }
   XHR.prototype.open = function(method,url) { this.method=method; this.url=url; };
@@ -64,6 +68,7 @@ function device(controller, storageEnabled = true) {
   vm.runInContext(fs.readFileSync(new URL('../state.js',import.meta.url),'utf8'),context);
   // Legacy preferences migrate without losing the selected face.
   assert.equal(window.RoomState.get().view,'weather');
+  assert.equal(window.RoomState.get().palette,'recommended');
   if(storageEnabled)assert.equal(window.RoomState.get().theme,'keycap');
   vm.runInContext(fs.readFileSync(new URL('../remote.js',import.meta.url),'utf8'),context);
   for(const callback of events.DOMContentLoaded || [])callback();
@@ -86,19 +91,47 @@ assert.equal((await api('/settings')).body.settings.theme,'terminal');
 control.offline(false);control.poll();await settle();display.poll();await settle();
 assert.equal(display.state.get().theme,'tide');
 assert.equal(display.state.get().view,'clock');
-for (const theme of ['meridian', 'atelier', 'platform']) {
-  for (const mode of ['light', 'dark']) {
-    for (const view of ['clock', 'glance', 'weather']) {
-      assert.equal(control.state.set({theme,mode,view}),true);
-      await settle(); display.poll(); await settle(); control.poll(); await settle();
-      assert.equal(display.state.get().theme,theme);
-      assert.equal(display.state.get().mode,mode);
-      assert.equal(display.state.get().view,view);
-      const saved=await api('/settings');
-      assert.equal(saved.body.confirmedRevision,saved.body.revision);
+for (const theme of ['calm','keycap','edition','terminal','tide','meridian','atelier','platform']) {
+  for (const palette of ['recommended','orange','blue','red','green']) {
+    for (const mode of ['light','dark']) {
+      for (const view of ['clock','glance','weather']) {
+        assert.equal(control.state.set({theme,palette,mode,view}),true);
+        await settle(); display.poll(); await settle(); control.poll(); await settle();
+        assert.equal(display.state.get().theme,theme);
+        assert.equal(display.state.get().palette,palette);
+        assert.equal(display.state.get().mode,mode);
+        assert.equal(display.state.get().view,view);
+        const saved=await api('/settings');
+        assert.equal(saved.body.confirmedRevision,saved.body.revision);
+      }
     }
   }
 }
+// An older client must not read/acknowledge a palette it cannot render.
+control.state.set({theme:'calm',palette:'orange',mode:'dark',view:'weather'});
+await settle();
+const paletteRevision = (await api('/settings')).body.revision;
+const mixedCacheDisplay = device(false,true,false);
+const mixedMessages=[];mixedCacheDisplay.remote.subscribe(message=>mixedMessages.push(message));
+await settle();
+assert.match(mixedMessages.at(-1),/Palette update needed/);
+assert.notEqual((await api('/settings')).body.confirmedRevision,paletteRevision);
+assert.equal((await api('/settings','GET',undefined,key,undefined,'')).status,426);
+assert.equal((await api('/ack','POST',{revision:paletteRevision},key,undefined,'')).status,426);
+assert.equal((await api('/settings','PUT',{revision:paletteRevision,settings:{theme:'calm',mode:'light',view:'clock'}},key,undefined,'')).status,426);
+assert.notEqual((await api('/settings')).body.confirmedRevision,paletteRevision);
+// Recommended remains usable by old clients, and old writes cannot break the new reader.
+control.state.set({theme:'calm',palette:'recommended',mode:'dark',view:'weather'});
+await settle();
+const legacy = await api('/settings','GET',undefined,key,undefined,'');
+assert.equal(legacy.status,200); assert.equal(legacy.body.settings.palette,undefined);
+assert.equal((await api('/settings','PUT',{revision:legacy.body.revision,settings:{theme:'edition',mode:'light',view:'glance'}},key,undefined,'')).status,200);
+assert.equal((await api('/settings')).body.settings.palette,'recommended');
+const beforeInvalid = await api('/settings');
+for (const invalid of [{theme:'calm',mode:'dark',view:'clock',palette:'ultraviolet'}, {theme:'calm',mode:'dark',view:'clock',palette:null}, {theme:'calm',mode:'dark',view:'clock',palette:'blue',extra:1}]) {
+  assert.equal((await api('/settings','PUT',{revision:beforeInvalid.body.revision,settings:invalid})).status,400);
+}
+await settle(); control.poll(); await settle();
 // A display with an older validator must distinguish unsupported settings from offline.
 const olderDisplay = device(false);
 const currentValid = olderDisplay.state.valid;
@@ -118,4 +151,4 @@ olderDisplay.offline(true); olderDisplay.poll(); await settle();
 assert.equal(messages.at(-1), 'Offline · local controls still work');
 const unavailable=device(true,false);await settle();assert.equal(unavailable.remote.paired(),false);
 assert.equal(unavailable.state.set({theme:'tide',mode:'light',view:'glance'}),true);
-console.log('Passed: Worker auth/CORS, state validation, conflict protection, display acknowledgment, one-use/expired pairing, legacy settings migration, bidirectional sync, offline retry, and unavailable storage.');
+console.log('Passed: 240 face/palette/mode/view sync+ack combinations, legacy palette negotiation, unsupported palette ack rejection, Worker auth/CORS, state validation, conflict protection, display acknowledgment, one-use/expired pairing, legacy settings migration, bidirectional sync, offline retry, and unavailable storage.');

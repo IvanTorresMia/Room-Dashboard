@@ -17,8 +17,12 @@
     root.setAttribute('data-theme', theme);
     root.setAttribute('data-mode', mode);
     root.setAttribute('data-view', state.view);
+    root.setAttribute('data-palette', state.palette || 'recommended');
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) { meta.setAttribute('content', faces[theme][mode]); }
+    if (meta) {
+      var colors = window.RoomThemes && window.RoomThemes.palettes && window.RoomThemes.palettes[state.palette];
+      meta.setAttribute('content', colors && colors[mode] ? colors[mode].background : faces[theme][mode]);
+    }
   }
   apply();
   document.addEventListener('DOMContentLoaded', function () {
@@ -26,6 +30,8 @@
     var modeButton = document.getElementById('mode-toggle');
     var viewSelect = document.getElementById('view-select');
     var picker = document.getElementById('face-picker');
+    var paletteSelect = document.getElementById('palette-select');
+    var paletteReset = document.getElementById('palette-reset');
     var choices = picker.querySelectorAll('[data-face]');
     function closePicker(restoreFocus) {
       picker.hidden = true;
@@ -35,6 +41,8 @@
     function update() {
       state = window.RoomState.get(); theme = state.theme; mode = state.mode;
       viewSelect.value = state.view;
+      if (paletteSelect) { paletteSelect.value = state.palette || 'recommended'; }
+      if (paletteReset) { paletteReset.hidden = !state.palette || state.palette === 'recommended'; }
       apply();
       var name = faces[theme].name;
       document.getElementById('theme-name').textContent = name;
@@ -47,7 +55,7 @@
       modeButton.setAttribute('aria-label', 'Switch to ' + (mode === 'dark' ? 'light' : 'dark') + ' mode');
     }
     function save() {
-      window.RoomState.set({ theme: theme, mode: mode, view: viewSelect.value });
+      window.RoomState.set({ theme: theme, mode: mode, view: viewSelect.value, palette: state.palette || 'recommended' });
       update();
     }
     themeButton.addEventListener('click', function () {
@@ -70,6 +78,8 @@
     });
     modeButton.addEventListener('click', function () { mode = mode === 'dark' ? 'light' : 'dark'; save(); });
     viewSelect.addEventListener('change', save);
+    if (paletteSelect) { paletteSelect.addEventListener('change', function () { var value = window.RoomState.get(); value.palette = this.value; window.RoomState.set(value); }); }
+    if (paletteReset) { paletteReset.addEventListener('click', function () { var value = window.RoomState.get(); value.palette = 'recommended'; window.RoomState.set(value); paletteSelect.focus(); }); }
     window.RoomState.subscribe(update);
     update();
   });

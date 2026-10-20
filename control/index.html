@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="referrer" content="no-referrer"><title>Control · Ivan's Room</title>
-<link rel="stylesheet" href="control.css?v=8">
-<script src="../theme-catalog.js?v=8"></script><script src="../state.js?v=9"></script><script src="../remote-config.js?v=5"></script><script src="../remote.js?v=9" defer></script><script src="control.js?v=7" defer></script>
+<meta name="referrer" content="no-referrer">
+<meta id="appearance-capability" name="room-appearance-version" content="2"><title>Control · Ivan's Room</title>
+<link rel="stylesheet" href="control.css?v=10">
+<script src="../theme-catalog.js?v=10"></script><script src="../state.js?v=10"></script><script src="../remote-config.js?v=5"></script><script src="../remote.js?v=10" defer></script><script src="control.js?v=10" defer></script>
 </head>
 <body><main class="controller">
 <header><a class="home-link" href="../">IVAN'S ROOM ↗</a><span class="tag">REMOTE CONTROL</span></header>
@@ -19,7 +20,13 @@
 </section>
 <div class="control-grid"><section class="panel settings"><h2>What’s on display?</h2><div class="view-options" role="group" aria-label="Content view"><button type="button" data-view="clock"><strong>Clock</strong><span>Just the time &amp; date</span></button><button type="button" data-view="glance"><strong>Glance</strong><span>Time &amp; current weather</span></button><button type="button" data-view="weather"><strong>Weather</strong><span>Forecast &amp; sunset too</span></button></div>
 <h2>Choose a style</h2><div class="theme-options" role="group" aria-label="Style"><button type="button" data-theme="calm"><i class="calm"></i>Calm</button><button type="button" data-theme="keycap"><i class="keycap"></i>Keycap</button><button type="button" data-theme="edition"><i class="edition"></i>Edition</button><button type="button" data-theme="terminal"><i class="terminal"></i>Terminal</button><button type="button" data-theme="tide"><i class="tide"></i>Tide</button><button type="button" data-theme="meridian"><i class="meridian"></i>Meridian</button><button type="button" data-theme="atelier"><i class="atelier"></i>Atelier</button><button type="button" data-theme="platform"><i class="platform"></i>Platform</button></div>
+<h2>Choose a palette</h2><p class="small palette-help">Recommended follows the face. A chosen color stays as you try other faces.</p><div class="palette-options" role="group" aria-label="Color palette">
+<button type="button" data-palette="recommended"><i class="palette-swatch recommended" id="recommended-swatch" aria-hidden="true"></i><span>Recommended<small id="recommended-note">The face’s original colors</small></span></button>
+<button type="button" data-palette="orange"><i class="palette-swatch signal-orange" aria-hidden="true"></i><span>Signal Orange</span></button>
+<button type="button" data-palette="blue"><i class="palette-swatch ion-blue" aria-hidden="true"></i><span>Ion Blue</span></button>
+<button type="button" data-palette="red"><i class="palette-swatch laser-red" aria-hidden="true"></i><span>Laser Red</span></button>
+<button type="button" data-palette="green"><i class="palette-swatch phosphor-green" aria-hidden="true"></i><span>Phosphor Green</span></button></div><button type="button" id="palette-reset" class="palette-reset" hidden>Use recommended colors</button>
 <h2>Light or dark?</h2><div class="mode-options" role="group" aria-label="Brightness"><button type="button" data-mode="light">☀ Light</button><button type="button" data-mode="dark">☾ Dark</button></div><p class="small" id="selection-summary"></p></section>
-<section class="panel preview-panel"><h2>Your selection</h2><p class="small">Preview of your chosen settings. The status above tells you when the wall display confirms them.</p><div id="preview-wrap"><iframe id="preview" src="../?preview=1&amp;v=8" title="Dashboard preview" tabindex="-1" aria-hidden="true"></iframe></div><p class="small">The iPad keeps its own controls, too.</p></section></div>
+<section class="panel preview-panel"><h2>Your selection</h2><p class="small">Preview of your chosen settings. The status above tells you when the wall display confirms them.</p><div id="preview-wrap"><iframe id="preview" src="../?preview=1&amp;v=10" title="Dashboard preview" tabindex="-1" aria-hidden="true"></iframe></div><p class="small">The iPad keeps its own controls, too.</p></section></div>
 <footer>Made for a quiet corner of Redding.</footer>
 </main></body></html>
