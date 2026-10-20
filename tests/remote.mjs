@@ -60,6 +60,7 @@ function device(controller, storageEnabled = true) {
     })());
   };
   const context = vm.createContext({window,document,location:{pathname:controller?'/Room-Dashboard/control/':'/Room-Dashboard/',search:'',hash:'',origin:'https://ivantorresmia.github.io'},history:{},XMLHttpRequest:XHR,localStorage:{getItem(k){ if(!storageEnabled)throw Error();return storage[k] || null;},setItem(k,v){if(!storageEnabled)throw Error();storage[k]=v;},removeItem(k){delete storage[k];}},setInterval(fn){intervals.push(fn);},setTimeout(fn){promises.push(Promise.resolve().then(fn));},console});
+  vm.runInContext(fs.readFileSync(new URL('../theme-catalog.js',import.meta.url),'utf8'),context);
   vm.runInContext(fs.readFileSync(new URL('../state.js',import.meta.url),'utf8'),context);
   // Legacy preferences migrate without losing the selected face.
   assert.equal(window.RoomState.get().view,'weather');
@@ -85,6 +86,19 @@ assert.equal((await api('/settings')).body.settings.theme,'terminal');
 control.offline(false);control.poll();await settle();display.poll();await settle();
 assert.equal(display.state.get().theme,'tide');
 assert.equal(display.state.get().view,'clock');
+for (const theme of ['meridian', 'atelier', 'platform']) {
+  for (const mode of ['light', 'dark']) {
+    for (const view of ['clock', 'glance', 'weather']) {
+      assert.equal(control.state.set({theme,mode,view}),true);
+      await settle(); display.poll(); await settle(); control.poll(); await settle();
+      assert.equal(display.state.get().theme,theme);
+      assert.equal(display.state.get().mode,mode);
+      assert.equal(display.state.get().view,view);
+      const saved=await api('/settings');
+      assert.equal(saved.body.confirmedRevision,saved.body.revision);
+    }
+  }
+}
 const unavailable=device(true,false);await settle();assert.equal(unavailable.remote.paired(),false);
 assert.equal(unavailable.state.set({theme:'tide',mode:'light',view:'glance'}),true);
 console.log('Passed: Worker auth/CORS, state validation, conflict protection, display acknowledgment, one-use/expired pairing, legacy settings migration, bidirectional sync, offline retry, and unavailable storage.');

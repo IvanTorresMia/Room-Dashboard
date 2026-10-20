@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="no-referrer"><title>Control · Ivan's Room</title>
-<link rel="stylesheet" href="control.css?v=5">
-<script src="../state.js?v=5"></script><script src="../remote-config.js?v=5"></script><script src="../remote.js?v=7" defer></script><script src="control.js?v=7" defer></script>
+<link rel="stylesheet" href="control.css?v=8">
+<script src="../theme-catalog.js?v=8"></script><script src="../state.js?v=8"></script><script src="../remote-config.js?v=5"></script><script src="../remote.js?v=7" defer></script><script src="control.js?v=7" defer></script>
 </head>
 <body><main class="controller">
 <header><a class="home-link" href="../">IVAN'S ROOM ↗</a><span class="tag">REMOTE CONTROL</span></header>
@@ -18,8 +18,8 @@
 <div id="sharing" hidden><h3>Pair another device</h3><p>Generate a one-use code, then enter it on the other device’s control page. Codes expire after 10 minutes.</p><button id="create-code" type="button">Generate pairing code</button><output id="generated-code"></output><p>Or copy the private display link and open it on the iPad.</p><input id="display-link" readonly aria-label="Private display pairing link"><button id="copy-link" type="button">Copy display link</button><p class="small">Anyone with this code or link can control the display. Keep it private.</p><button id="disconnect" type="button">Disconnect this device</button></div>
 </section>
 <div class="control-grid"><section class="panel settings"><h2>What’s on display?</h2><div class="view-options" role="group" aria-label="Content view"><button type="button" data-view="clock"><strong>Clock</strong><span>Just the time &amp; date</span></button><button type="button" data-view="glance"><strong>Glance</strong><span>Time &amp; current weather</span></button><button type="button" data-view="weather"><strong>Weather</strong><span>Forecast &amp; sunset too</span></button></div>
-<h2>Choose a style</h2><div class="theme-options" role="group" aria-label="Style"><button type="button" data-theme="calm"><i class="calm"></i>Calm</button><button type="button" data-theme="keycap"><i class="keycap"></i>Keycap</button><button type="button" data-theme="edition"><i class="edition"></i>Edition</button><button type="button" data-theme="terminal"><i class="terminal"></i>Terminal</button><button type="button" data-theme="tide"><i class="tide"></i>Tide</button></div>
+<h2>Choose a style</h2><div class="theme-options" role="group" aria-label="Style"><button type="button" data-theme="calm"><i class="calm"></i>Calm</button><button type="button" data-theme="keycap"><i class="keycap"></i>Keycap</button><button type="button" data-theme="edition"><i class="edition"></i>Edition</button><button type="button" data-theme="terminal"><i class="terminal"></i>Terminal</button><button type="button" data-theme="tide"><i class="tide"></i>Tide</button><button type="button" data-theme="meridian"><i class="meridian"></i>Meridian</button><button type="button" data-theme="atelier"><i class="atelier"></i>Atelier</button><button type="button" data-theme="platform"><i class="platform"></i>Platform</button></div>
 <h2>Light or dark?</h2><div class="mode-options" role="group" aria-label="Brightness"><button type="button" data-mode="light">☀ Light</button><button type="button" data-mode="dark">☾ Dark</button></div><p class="small" id="selection-summary"></p></section>
-<section class="panel preview-panel"><h2>Your selection</h2><p class="small">Preview of your chosen settings. The status above tells you when the wall display confirms them.</p><div id="preview-wrap"><iframe id="preview" src="../?preview=1" title="Dashboard preview" tabindex="-1" aria-hidden="true"></iframe></div><p class="small">The iPad keeps its own controls, too.</p></section></div>
+<section class="panel preview-panel"><h2>Your selection</h2><p class="small">Preview of your chosen settings. The status above tells you when the wall display confirms them.</p><div id="preview-wrap"><iframe id="preview" src="../?preview=1&amp;v=8" title="Dashboard preview" tabindex="-1" aria-hidden="true"></iframe></div><p class="small">The iPad keeps its own controls, too.</p></section></div>
 <footer>Made for a quiet corner of Redding.</footer>
 </main></body></html>

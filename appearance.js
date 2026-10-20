@@ -5,13 +5,7 @@
   var theme = state.theme;
   var mode = state.mode;
   var root = document.documentElement;
-  var faces = {
-    calm: { name: 'Calm', light: '#f3efe5', dark: '#171e23' },
-    keycap: { name: 'Keycap', light: '#eeefed', dark: '#1c1e22' },
-    edition: { name: 'Edition', light: '#f5f0e5', dark: '#25211f' },
-    terminal: { name: 'Terminal', light: '#edf3e7', dark: '#101c16' },
-    tide: { name: 'Tide', light: '#edf5fa', dark: '#122535' }
-  };
+  var faces = window.RoomThemes.faces;
   function apply() {
     root.setAttribute('data-theme', theme);
     root.setAttribute('data-mode', mode);

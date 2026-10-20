@@ -1,4 +1,5 @@
-const THEMES = ['calm', 'keycap', 'edition', 'terminal', 'tide'];
+import catalog from '../theme-catalog.js';
+const THEMES = catalog.ids;
 const VIEWS = ['clock', 'glance', 'weather'];
 export function validState(value) {
   return value && Object.keys(value).length === 3 && THEMES.includes(value.theme) && VIEWS.includes(value.view) && ['light', 'dark'].includes(value.mode);
