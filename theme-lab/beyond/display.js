@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  var scene = 'form', mode = 'light', artwork = 0, thought = 0, board = 0, editorReturn = null;
+  var scene = 'form', mode = 'light', palette = 'studio', artwork = 0, thought = 0, board = 0, editorReturn = null;
   var duration = 1500, remaining = 1500, deadline = 0, running = false, timer = null;
   var art = [['Terracotta study', 'Arches, afternoon light, and a place to pause.', 'Terracotta study: a red sun, architectural arches and fine vertical lines'], ['A quiet horizon', 'A circle, a meeting of colors, a little distance.', 'A quiet horizon: a blue circle, a cream disc and still horizontal lines'], ['Two sides of a moment', 'Plum, rose, and a conversation in the middle.', 'Two sides of a moment: divided plum and rose fields with overlapping circles']];
   var thoughts = [['There is no hurry\nto be anywhere else.', 'MAKE YOURSELF AT HOME'], ['A little less noise.\nA little more room.', 'A THOUGHT FOR TODAY'], ['Good things can\nbe ordinary things.', 'OUR LITTLE HOME']];
@@ -8,10 +8,16 @@
   function put(id, value) { el(id).textContent = value; }
   function trim(value) { return value.replace(/^\s+|\s+$/g, ''); }
   function pad(value) { return value < 10 ? '0' + value : String(value); }
-  location.search.slice(1).split('&').forEach(function (pair) { var parts = pair.split('='); if (parts[0] === 'scene' && ['form', 'reminder', 'house', 'focus'].indexOf(parts[1]) !== -1) { scene = parts[1]; } if (parts[0] === 'mode' && parts[1] === 'dark') { mode = 'dark'; } });
-  document.body.className = mode + ' ' + scene;
+  location.search.slice(1).split('&').forEach(function (pair) { var parts = pair.split('='); if (parts[0] === 'scene' && ['form', 'reminder', 'house', 'focus'].indexOf(parts[1]) !== -1) { scene = parts[1]; } if (parts[0] === 'mode' && parts[1] === 'dark') { mode = 'dark'; } if (parts[0] === 'palette' && ['orange', 'blue', 'red', 'green'].indexOf(parts[1]) !== -1) { palette = parts[1]; } });
+  document.body.className = mode + ' ' + scene + (palette === 'studio' ? '' : ' tech');
+  document.body.setAttribute('data-palette', palette);
   ['form', 'reminder', 'house', 'focus'].forEach(function (name) { el(name + '-scene').hidden = scene !== name; el(name + '-actions').hidden = scene !== name; });
   var titles = { form: 'FORM GALLERY', reminder: 'A SMALL REMINDER', house: 'HOUSE NOTES', focus: 'ONE THING' };
+  if (palette !== 'studio') {
+    art = [['Signal architecture', 'Solid forms. Sharp edges. No moving parts.', 'Signal architecture: an accent disc, contrasting arches and circuit-like lines'], ['Orbital field', 'A system at rest. Circles and parallel tracks.', 'Orbital field: concentric contrasting discs and parallel tracks'], ['Split channel', 'Two fields. One shared center.', 'Split channel: divided fields, overlapping discs and vertical tracks']];
+    put('art-name', art[0][0]); put('art-description', art[0][1]); put('art-title', art[0][2]);
+    thoughts = [['Less noise.\nMore signal.', 'PERSONAL SPACE / LOCAL MODE'], ['Make room\nfor what matters.', 'ONE ROOM / YOUR RULES'], ['Offline is\na good place to be.', 'A LITTLE LESS INPUT']];
+  }
   put('identity', titles[scene]); document.title = titles[scene] + ' · Room lab prototype';
   put('footnote', { form: 'ORIGINAL SVG ART · NO IMAGE DOWNLOADS', reminder: 'PERSONAL WORDS · THIS SESSION ONLY', house: 'SAMPLE CONTENT · NO CALENDAR OR PHONE SYNC', focus: 'LOCAL FOCUS TIMER · RELOAD STARTS OVER' }[scene]);
   el('next-art').addEventListener('click', function () {
