@@ -99,6 +99,23 @@ for (const theme of ['meridian', 'atelier', 'platform']) {
     }
   }
 }
+// A display with an older validator must distinguish unsupported settings from offline.
+const olderDisplay = device(false);
+const currentValid = olderDisplay.state.valid;
+olderDisplay.state.valid = value => currentValid(value) && ['calm','keycap','edition','terminal','tide'].includes(value.theme);
+const messages = [];
+olderDisplay.remote.subscribe(message => messages.push(message));
+control.state.set({theme:'meridian',mode:'light',view:'weather'});
+await settle(); olderDisplay.poll(); await settle();
+assert.match(messages.at(-1), /Display update needed/);
+const unacknowledged = await api('/settings');
+assert.notEqual(unacknowledged.body.confirmedRevision, unacknowledged.body.revision);
+control.state.set({theme:'calm',mode:'dark',view:'clock'});
+await settle(); olderDisplay.poll(); await settle();
+assert.equal(olderDisplay.state.get().theme, 'calm');
+assert.equal(messages.at(-1), 'Connected');
+olderDisplay.offline(true); olderDisplay.poll(); await settle();
+assert.equal(messages.at(-1), 'Offline · local controls still work');
 const unavailable=device(true,false);await settle();assert.equal(unavailable.remote.paired(),false);
 assert.equal(unavailable.state.set({theme:'tide',mode:'light',view:'glance'}),true);
 console.log('Passed: Worker auth/CORS, state validation, conflict protection, display acknowledgment, one-use/expired pairing, legacy settings migration, bidirectional sync, offline retry, and unavailable storage.');

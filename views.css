@@ -54,3 +54,5 @@ html .display-pair-card button { background: #284333; color: #fff; border: 1px s
 .display-pair-card .pair-note { font-size: 13px; color: #52665a; }
 #display-pair-status { font-size: 15px; }
 @media (max-height: 600px) { .display-pair-overlay { -webkit-align-items: flex-start; align-items: flex-start; } }
+
+.display-pair-card .display-update { display: inline-block; color: #284333; padding: 12px 8px; margin-right: 14px; font-weight: 700; min-height: 44px; }

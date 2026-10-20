@@ -9,6 +9,18 @@
     var submit = document.getElementById('display-pair-submit');
     var close = document.getElementById('display-pair-close');
     var message = document.getElementById('display-pair-status');
+    var updateLink = document.getElementById('update-display');
+    if (!updateLink) {
+      // An old cached document may fetch this newer script. Give it an update path too.
+      updateLink = document.createElement('a');
+      updateLink.id = 'update-display'; updateLink.className = 'display-update';
+      updateLink.href = '?display-update=9'; updateLink.textContent = 'Update display';
+      close.parentNode.insertBefore(updateLink, close);
+    }
+    updateLink.addEventListener('click', function () {
+      // Navigate inside this Home Screen app: keep its origin and pairing store.
+      updateLink.href = location.pathname + '?display-update=' + Date.now();
+    });
     function update() { trigger.textContent = remote.paired() ? 'Display paired' : 'Pair display'; }
     function dismiss() { panel.hidden = true; trigger.focus(); }
     trigger.addEventListener('click', function () {

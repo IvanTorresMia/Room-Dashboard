@@ -12,15 +12,15 @@
   <title>Ivan's Room · Redding</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <script src="theme-catalog.js?v=8"></script>
-  <script src="state.js?v=8"></script>
-  <script src="appearance.js?v=8"></script>
+  <script src="state.js?v=9"></script>
+  <script src="appearance.js?v=9"></script>
   <link rel="stylesheet" href="style.css?v=5">
   <link rel="stylesheet" href="faces.css?v=5">
-  <link rel="stylesheet" href="views.css?v=7">
+  <link rel="stylesheet" href="views.css?v=9">
   <link rel="stylesheet" href="themes.css?v=8">
   <script src="remote-config.js?v=5"></script>
-  <script src="remote.js?v=7" defer></script>
-  <script src="display-pair.js?v=7" defer></script>
+  <script src="remote.js?v=9" defer></script>
+  <script src="display-pair.js?v=9" defer></script>
   <script src="app.js?v=5" defer></script>
 </head>
 <body>
@@ -80,6 +80,8 @@
       <p class="pair-note">If you use the Home Screen app, pair here inside that app. Safari and the Home Screen app can keep separate connections.</p>
       <form id="display-pair-form"><label for="display-pair-code">Pairing code</label><input id="display-pair-code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX-XXXX" required><button id="display-pair-submit" type="submit">Pair this display</button></form>
       <p id="display-pair-status" role="status"></p>
+      <p class="pair-note">Display version 9 · 8 faces. Updating keeps this app’s saved pairing.</p>
+      <a class="display-update" id="update-display" href="?display-update=9">Update display</a>
       <button id="display-pair-close" type="button">Close</button>
     </div>
   </section>

@@ -3,7 +3,8 @@
   var key = 'room-appearance-v1';
   var current = { theme: 'calm', mode: 'dark', view: 'weather' };
   var listeners = [];
-  var themes = window.RoomThemes.ids;
+  // Frozen pre-catalog fallback for an older cached HTML document.
+  var themes = window.RoomThemes ? window.RoomThemes.ids : ['calm', 'keycap', 'edition', 'terminal', 'tide'];
   var views = ['clock', 'glance', 'weather'];
   function valid(value) {
     return value && themes.indexOf(value.theme) >= 0 && ['light', 'dark'].indexOf(value.mode) >= 0 && views.indexOf(value.view) >= 0;

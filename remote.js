@@ -45,7 +45,12 @@
     var active = generation;
     request('GET', '/settings', null, function (code, data) {
       if (active !== generation) { return; }
-      if (code !== 200 || !accept(data)) { busy = false; status(code === 401 ? 'Pairing expired · reconnect this device' : 'Offline · local controls still work'); return; }
+      if (code !== 200) { busy = false; status(code === 401 ? 'Pairing expired · reconnect this device' : 'Offline · local controls still work'); return; }
+      if (!accept(data)) {
+        busy = false;
+        status(controller ? 'Settings not supported · reload this controller' : 'Display update needed · tap Display paired, then Update display');
+        return;
+      }
       revision = data.revision; confirmed = data.confirmedRevision; seen = data.displaySeen;
       if (pending) {
         var sending = pending;
